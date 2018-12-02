@@ -26,7 +26,6 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
   axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
     .then((results) => {
       resolve(results.data.data);
-      console.log(results.data.data[0]);
     })
     .catch((error) => {
       reject(error);
