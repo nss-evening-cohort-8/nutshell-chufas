@@ -6,6 +6,8 @@ import apiKeys from '../db/apiKeys.json';
 import auth from './components/Auth/auth';
 import navbar from './components/Navbar/navbar';
 import authHelpers from './helpers/authHelpers';
+import weather from './components/Weather/weather';
+import weatherData from './helpers/Data/weatherData';
 
 import './index.scss';
 
@@ -14,6 +16,8 @@ const initApp = () => {
   navbar.createNavbar();
   authHelpers.checkLoginStatus();
   auth.loginBtn();
+  weatherData.getWeatherData();
+  weather.initWeather();
 };
 
 initApp();
