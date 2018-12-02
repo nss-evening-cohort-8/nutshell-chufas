@@ -2,9 +2,9 @@ import axios from 'axios';
 import apiKeys from '../../../db/apiKeys.json';
 
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
+const weatherbitKey = apiKeys.weatherbitKeys.apiKey;
 
 const getWeatherData = uid => new Promise((resolve, reject) => {
-  console.log(uid);
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
     .then((results) => {
       const weatherObject = results.data;
@@ -22,4 +22,15 @@ const getWeatherData = uid => new Promise((resolve, reject) => {
     });
 });
 
-export default { getWeatherData };
+const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
+  axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
+    .then((results) => {
+      resolve(results.data.data);
+      console.log(results.data.data[0]);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+export default { getWeatherData, getCurrentWeather };
