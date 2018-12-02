@@ -14,7 +14,7 @@ import './index.scss';
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
-  authHelpers.checkLoginStatus();
+  authHelpers.authHelperInit();
   auth.loginBtn();
   weatherData.getWeatherData();
   weather.initWeather();
