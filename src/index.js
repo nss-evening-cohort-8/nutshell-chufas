@@ -7,17 +7,14 @@ import auth from './components/Auth/auth';
 import navbar from './components/Navbar/navbar';
 import authHelpers from './helpers/authHelpers';
 import weather from './components/Weather/weather';
-import weatherData from './helpers/Data/weatherData';
 
 import './index.scss';
 
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
-  authHelpers.authHelperInit();
+  authHelpers.checkLoginStatus(weather.initWeather);
   auth.loginBtn();
-  weatherData.getWeatherData();
-  weather.initWeather();
 };
 
 initApp();

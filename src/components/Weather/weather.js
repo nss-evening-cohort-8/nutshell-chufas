@@ -1,8 +1,8 @@
 // import $ from 'jquery';
-import weatherData from '../../helpers/Data/weatherData';
 import authHelpers from '../../helpers/authHelpers';
+import weatherData from '../../helpers/Data/weatherData';
 
-const getAllWeather = () => {
+const weatherPage = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getWeatherData(uid)
     .then((weatherArray) => {
@@ -14,7 +14,7 @@ const getAllWeather = () => {
 };
 
 const initWeather = () => {
-  getAllWeather();
+  weatherPage();
 };
 
-export default { getAllWeather, initWeather };
+export default { initWeather };

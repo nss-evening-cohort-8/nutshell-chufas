@@ -2,12 +2,13 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import $ from 'jquery';
 
-const checkLoginStatus = () => {
+const checkLoginStatus = (initWeather) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#auth').hide();
       $('#navbar-button-auth').hide();
       $('#navbar-button-logout').show();
+      initWeather();
     } else {
       $('#navbar-button-auth').show();
       $('#navbar-button-logout').hide();
@@ -17,9 +18,4 @@ const checkLoginStatus = () => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-const authHelperInit = () => {
-  checkLoginStatus();
-  getCurrentUid();
-};
-
-export default { authHelperInit };
+export default { checkLoginStatus, getCurrentUid };

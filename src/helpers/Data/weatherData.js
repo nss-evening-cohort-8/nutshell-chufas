@@ -7,7 +7,6 @@ const getWeatherData = uid => new Promise((resolve, reject) => {
   console.log(uid);
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
     .then((results) => {
-      console.log(results.data);
       const weatherObject = results.data;
       const weatherArray = [];
       if (weatherObject !== null) {
@@ -16,7 +15,6 @@ const getWeatherData = uid => new Promise((resolve, reject) => {
           weatherArray.push(weatherObject[weatherId]);
         });
       }
-      console.log(weatherArray);
       resolve(weatherArray);
     })
     .catch((error) => {
