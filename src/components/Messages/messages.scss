@@ -1,0 +1,15 @@
+#messages #message-board {
+  margin-top: 10px;
+  padding-top: 8px;
+  .msg-row {
+    p {
+      padding: 0.5rem;
+      margin: 0;
+    }
+    .msg-btn {
+      width: 33px;
+      height: 33px;
+      margin: 0px 3px 0px 3px;
+    }
+  }
+}
