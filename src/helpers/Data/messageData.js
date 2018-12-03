@@ -33,7 +33,6 @@ const getAllMessages = () => new Promise((resolve, reject) => {
           messagesArray.push(messagesObject[messageId]);
         });
       }
-      console.log(messagesArray);
       resolve(messagesArray);
     })
     .catch((err) => {
