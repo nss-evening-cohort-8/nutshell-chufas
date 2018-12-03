@@ -5,7 +5,7 @@ import weatherData from '../../helpers/Data/weatherData';
 const printWeather = (currentWeather) => {
   const domstring = `
     <p>${currentWeather[0].city_name}, ${currentWeather[0].state_code}</p>
-    <p>${currentWeather[0].temp}</p>
+    <p>${currentWeather[0].temp}&degF</p>
     <img src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png ">
     <p>${currentWeather[0].weather.description}</p>
   `;
