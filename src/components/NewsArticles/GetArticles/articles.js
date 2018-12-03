@@ -7,10 +7,11 @@ import deleteIcon from '../../images/deleteIcon.jpeg';
 
 const creatCards = (articles) => {
   let domString = '';
+  domString += '<button class="btn-info edit-btn" id="add-articles">Add Articles</button>';
   articles.forEach((article) => {
-    domString += `<div class="card" style="width: 18rem;">
+    domString += `<div class="card" style="width: 40rem;">
     <div class="card-body">
-    <h5 class="card-title">Card title</h5>
+    <h5 class="card-title">${article.title}</h5>
     <p class="card-text">${article.synopsis}</p>
     <a href="${article.url}">Read more</a>
     <img src="${deleteIcon}" width="20px" height="20px" class="btn-danger delete-btn" data-delete-id=${article.id}>
