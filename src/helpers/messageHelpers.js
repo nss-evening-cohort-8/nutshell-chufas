@@ -1,5 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+// import admin from 'firebase-admin';
+
+// admin = require('firebase-admin');
+
+// admin.initializeApp();
 
 const getCurrentTimestamp = () => {
   const dt = new Date();
@@ -15,15 +20,20 @@ const convertTimestamp = (timestamp) => {
 
 const getCurrentUserName = () => firebase.auth().currentUser.displayName;
 
-// const getCurrentUserName = () => {
+// const getUserName = (uid) => {
 //   admin.auth().getUser(uid)
 //     .then((userRecord) => {
 //     // See the UserRecord reference doc for the contents of userRecord.
-//       console.log('Successfully fetched user data:', userRecord.toJSON());
+//       console.log(userRecord);
 //     })
 //     .catch((error) => {
 //       console.log('Error fetching user data:', error);
 //     });
 // };
 
-export default { getCurrentTimestamp, getCurrentUserName, convertTimestamp };
+export default {
+  getCurrentTimestamp,
+  getCurrentUserName,
+  convertTimestamp,
+  // getUserName,
+};

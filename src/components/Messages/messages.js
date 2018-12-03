@@ -5,16 +5,17 @@ import messageData from '../../helpers/Data/messageData';
 import messageHelpers from '../../helpers/messageHelpers';
 import './messages.scss';
 
-// const displayMsgInput = () => {
-//   const domString = `
-//   <input type="text" class="form-control" id="msg-input" placeholder="Enter your message then press enter">`;
-//   $('#message-board-input').html(domString);
-// };
+const displayMsgInput = () => {
+  const domString = `
+    <input type="text" class="form-control mr-1 msg-input" id="msg-input" placeholder="Enter your message then press enter">
+    <button type="button" class="btn btn-secondary msg-input" id="msg-input-btn">Submit</button>`;
+  $('#message-board-input').html(domString);
+};
 
 const printAllMessages = (messagesArray) => {
   const currentUid = authHelpers.getCurrentUid();
   let domString = '';
-  domString += '<input type="text" class="form-control" id="msg-input" placeholder="Enter your message then press enter">';
+  // domString += '<input type="text" class="form-control" id="msg-input" placeholder="Enter your message then press enter">';
   if (messagesArray.length > 20) {
     messagesArray.shift(messagesArray.length - 20, messagesArray.length);
   }
@@ -25,13 +26,13 @@ const printAllMessages = (messagesArray) => {
         <div class="col-md-2 p-0">
           <p class="text-left">${messageHelpers.convertTimestamp(message.timestamp)}</p>
         </div>
-        <div class="col-md-2">
-          <p class="text-left"><strong>${messageHelpers.getCurrentUserName()}</strong></p>
+        <div class="col-md-3">
+          <p class="text-left msg-row-user"><strong>${message.userUid}</strong></p>
         </div>
         <div class="col-md-6">
           <p class="text-left">${message.message}</p>
         </div>
-        <div class="col-md-2 row justify-content-end align-items-center">
+        <div class="col-md-1 row justify-content-center align-items-center p-0">
           <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id}>
             <i class="far fa-edit"></i>
           </button>
@@ -46,8 +47,8 @@ const printAllMessages = (messagesArray) => {
         <div class="col-md-2 p-0">
           <p class="text-left">${messageHelpers.convertTimestamp(message.timestamp)}</p>
         </div>
-        <div class="col-md-2">
-          <p class="text-left"><strong>${messageHelpers.getCurrentUserName()}</strong></p>
+        <div class="col-md-3">
+          <p class="text-left msg-row-user"><strong>${message.userUid}</strong></p>
         </div>
         <div class="col-md-6">
           <p class="text-left">${message.message}</p>
@@ -56,7 +57,7 @@ const printAllMessages = (messagesArray) => {
       <hr>`;
     }
   });
-  $('#message-board').html(domString);
+  $('#message-board-output').html(domString);
 };
 
 const getAllMessages = () => {
@@ -66,6 +67,7 @@ const getAllMessages = () => {
 };
 
 const initMessagesPage = () => {
+  displayMsgInput();
   getAllMessages();
 };
 
