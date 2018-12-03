@@ -22,6 +22,28 @@ const getWeatherData = uid => new Promise((resolve, reject) => {
     });
 });
 
+const getCurrentWeatherData = uid => new Promise((resolve, reject) => {
+  axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
+    .then((results) => {
+      const weatherObject = results.data;
+      const weatherArray = [];
+      if (weatherObject !== null) {
+        Object.keys(weatherObject).forEach((weatherId) => {
+          weatherObject[weatherId].id = weatherId;
+          weatherArray.push(weatherObject[weatherId]);
+        });
+      }
+      weatherArray.forEach((weatherData) => {
+        if (weatherData.isCurrent === true) {
+          resolve(weatherData);
+        }
+      });
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
   axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
     .then((results) => {
@@ -32,4 +54,4 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     });
 });
 
-export default { getWeatherData, getCurrentWeather };
+export default { getWeatherData, getCurrentWeatherData, getCurrentWeather };
