@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
-import messageData from '../../helpers/data/messageData';
+import messageData from '../../helpers/Data/messageData';
 import messageHelpers from '../../helpers/messageHelpers';
 import './messages.scss';
 
@@ -91,12 +91,10 @@ const addNewMessage = (e) => {
   // if message is not an empty string
   } else if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput !== '')) {
     messageData.addNewMessage(newMessageObject).then(() => {
-        getAllMessages();
-        // $('#message-board-output').scrollIntoView(newMessageObject);
-        const test = $('.msg-row:las').id;
-        console.log(test);
-        messageHelpers.resetMessageInput();
-      })
+      getAllMessages();
+      $('#message-board-output').animate({ scrollTop: $('#message-board-output').get(0).scrollHeight }, 1000);
+      messageHelpers.resetMessageInput();
+    })
       .catch((error) => {
         console.error(error);
       });

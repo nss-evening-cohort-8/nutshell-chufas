@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import authHelpers from '../../../helpers/authHelpers';
 
-import getAllArticles from '../../../helpers/data/dataGetter';
+import getAllArticles from '../../../helpers/Data/dataGetter';
 import deleteIcon from '../../images/deleteIcon.jpeg';
 
 const creatCards = (articles) => {
