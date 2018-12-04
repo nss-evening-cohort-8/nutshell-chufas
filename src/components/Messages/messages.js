@@ -70,4 +70,36 @@ const initMessagesPage = () => {
   getAllMessages();
 };
 
+const getMessageFromInput = () => {
+  const message = {
+    userUid: authHelpers.getCurrentUid(),
+    message: $('#msg-input').val(),
+    timeStamp: messageHelpers.convertTimestamp(messageHelpers.getCurrentTimestamp()),
+    isEdited: false,
+  };
+  return message;
+};
+
+const addNewMessage = (e) => {
+  const newMessageObject = getMessageFromInput();
+  const messageInput = newMessageObject.message;
+  // if message is an empty string
+  if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput === '')) {
+    messageHelpers.messageInputError();
+  // if message is not an empty string
+  } else if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput !== '')) {
+    messageData.addNewMessage(newMessageObject)
+      .then(() => {
+        initMessagesPage();
+        messageHelpers.resetMessageInput();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+};
+
+$('body').on('keyup', '#msg-input', addNewMessage);
+$('body').on('click', '#msg-input-btn', addNewMessage);
+
 export default initMessagesPage;

@@ -1,10 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-// import admin from 'firebase-admin';
-
-// admin = require('firebase-admin');
-
-// admin.initializeApp();
+import $ from 'jquery';
 
 const getCurrentTimestamp = () => {
   const dt = new Date();
@@ -22,14 +18,12 @@ const getCurrentUserName = () => firebase.auth().currentUser.displayName;
 
 const messageInputError = () => {
   $('#msg-input-btn').addClass('.btn-danger').removeClass('.btn-secondary');
-  $('#msg-input').addClass('.is-invalid');
   $('#msg-input').attr('placeholder', 'Message field cannot be blank');
 };
 
 const resetMessageInput = () => {
   $('#msg-input').val('');
   $('#msg-input-btn').addClass('.btn-secondary').removeClass('.btn-danger');
-  $('#msg-input').removeClass('.is-invalid');
   $('#msg-input').attr('placeholder', 'Enter new message');
 };
 
