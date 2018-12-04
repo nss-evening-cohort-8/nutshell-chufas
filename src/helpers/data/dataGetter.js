@@ -14,7 +14,6 @@ const getAllArticlesFromDb = uid => new Promise((resolve, reject) => {
           allArticlesArray.push(newArticle);
         });
       }
-      console.log(allArticlesArray);
       resolve(allArticlesArray);
     })
     .catch((err) => {

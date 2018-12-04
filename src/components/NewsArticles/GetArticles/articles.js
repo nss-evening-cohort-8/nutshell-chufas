@@ -26,7 +26,6 @@ const getArticles = () => {
   const uid = authHelpers.getCurrentUid();
   getAllArticles.getAllArticlesFromDb(uid)
     .then((allArticlesArray) => {
-      console.log(allArticlesArray);
       creatCards(allArticlesArray);
     })
     .catch((error) => {
