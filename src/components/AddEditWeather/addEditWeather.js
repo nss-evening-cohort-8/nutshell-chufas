@@ -3,7 +3,13 @@ import authHelpers from '../../helpers/authHelpers';
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
-const updateIsCurrent = (e) => {
+const updateCurrentLocation = (locationId) => {
+  const current = true;
+  weatherData.updateIsCurrent(locationId, current);
+  weather.initWeather();
+};
+
+const updateAllIsCurrent = (e) => {
   const locationId = e.target.id;
   const uid = authHelpers.getCurrentUid();
   weatherData.getWeatherData(uid)
@@ -11,22 +17,14 @@ const updateIsCurrent = (e) => {
       weatherArray.forEach((location) => {
         let current = location.isCurrent;
         current = false;
-        return weatherData.updateIsCurrent(location.id, current);
-      })
-        .then(() => {
-          console.log('WTF!!!!!');
-          const current = true;
-          weatherData.updateIsCurrent(locationId, current);
-          weather.weatherPage();
-        })
-        .catch((error) => {
-          console.error('error in updating isCurrent', error);
-        });
+        weatherData.updateIsCurrent(location.id, current);
+      });
+      updateCurrentLocation(locationId);
     });
 };
 
 const bindEvents = () => {
-  $('body').on('click', '.get-location', updateIsCurrent);
+  $('body').on('click', '.get-location', updateAllIsCurrent);
 };
 
 export default { bindEvents };

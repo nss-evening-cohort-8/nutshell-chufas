@@ -59,9 +59,11 @@ const weatherPage = () => {
   weatherData.getCurrentWeatherData(uid)
     .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
     .then((currentWeather) => {
+      console.log(currentWeather.length);
       if (currentWeather.length === 0) {
         printWeatherWarning();
       } else {
+        $('#weather-warning').html('');
         printWeather(currentWeather);
       }
     })
