@@ -43,7 +43,7 @@ Each collection should have data in the following structure:
     "userUid": "5ykBb0xyadPZLgH4EPO4i88HIql2",
     "url": "https://www.quantamagazine.org/newfound-wormhole-allows-information-to-escape-black-holes-20171023/",
     "title": "Wormholes Allow Information to Escape Black Holes",
-    "synopsis": "Check out this recent discovery about workholes"
+    "synopsis": " out this recent discovery about workholes"
 }
 ```
 
