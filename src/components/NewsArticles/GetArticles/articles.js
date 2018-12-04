@@ -22,18 +22,37 @@ const creatCards = (articles) => {
   $('#articles').html(domString);
 };
 
+const addArticleForm = () => {
+  let domString = '';
+  domString = `<form>
+  <div class="form-group">
+    <label for="input-title">Article Title</label>
+    <input type="text" class="form-control" id="input-title">
+  </div>
+  <div class="form-group">
+    <label for="inpute-synopsis">Synopsis</label>
+    <input type="text" class="form-control" id="input-synopsis">
+  </div>
+  <div class="form-group">
+    <label for="inpute-url">URL</label>
+    <input type="text" class="form-control" id="input-url">
+  </div>
+  <button type="submit" class="btn btn-primary" id="save-article">Save Article</button>
+</form>`;
+  $('#new-article').html(domString);
+};
+
 const getArticles = () => {
   const uid = authHelpers.getCurrentUid();
   getAllArticles.getAllArticlesFromDb(uid)
     .then((allArticlesArray) => {
-      console.log(allArticlesArray);
       creatCards(allArticlesArray);
     })
     .catch((error) => {
       console.error(error);
     });
 };
-
+$('body').on('click', '#add-articles', addArticleForm);
 const initializeArticlesPage = () => {
   getArticles();
 };
