@@ -48,7 +48,7 @@ const printWeatherWarning = () => {
           isTrueArray.push(weatherDataSet);
         }
         if (isTrueArray.length === 0) {
-          $('#weather-warning').html('Please Select A Location!');
+          $('#weather-warning').html('Please Select A Current Location!');
         }
       });
     });
@@ -59,9 +59,9 @@ const weatherPage = () => {
   weatherData.getCurrentWeatherData(uid)
     .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
     .then((currentWeather) => {
-      console.log(currentWeather.length);
       if (currentWeather.length === 0) {
         printWeatherWarning();
+        $('#weather-warning').html('Please Select A Location!');
       } else {
         $('#weather-warning').html('');
         printWeather(currentWeather);
