@@ -48,7 +48,7 @@ const printWeatherWarning = () => {
           isTrueArray.push(weatherDataSet);
         }
         if (isTrueArray.length === 0) {
-          $('#weather').html('Please Select A Location!');
+          $('#weather-warning').html('Please Select A Location!');
         }
       });
     });
@@ -78,35 +78,10 @@ const getLocationsForDropdown = () => {
     });
 };
 
-const udpdateIsCurrent = (e) => {
-  const locationId = e.target.id;
-  weatherData.getSingleLocation(locationId)
-    .then((singleLocation) => {
-      const updatedLocation = {
-        userUid: singleLocation.userUid,
-        zipcode: singleLocation.zipcode,
-        isCurrent: true,
-      };
-      weatherData.updateIsCurrent(updatedLocation, locationId)
-        .then(() => {
-          $('#weather').html('');
-          weatherPage();
-        });
-    })
-    .catch((error) => {
-      console.error('error in getting single for completed', error);
-    });
-};
-
-const bindEvents = () => {
-  $('body').on('click', '.get-location', udpdateIsCurrent);
-};
-
 const initWeather = () => {
   printWeatherWarning();
   getLocationsForDropdown();
   weatherPage();
-  bindEvents();
 };
 
 export default { initWeather };
