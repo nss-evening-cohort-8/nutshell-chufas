@@ -13,7 +13,7 @@ const creatCards = (articles) => {
     <div class="card-body">
     <h5 class="card-title">${article.title}</h5>
     <p class="card-text">${article.synopsis}</p>
-    <a href="${article.url}">Read more</a>
+    <a href="${article.url}" target="_blank">Read more</a>
     <img src="${deleteIcon}" width="20px" height="20px" class="btn-danger delete-btn" data-delete-id=${article.id}>
     <button class="btn-info edit-btn" data-edit-id=${article.id}>Edit</button>
     </div>
