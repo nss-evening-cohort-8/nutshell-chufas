@@ -2,12 +2,21 @@ import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import weatherData from '../../helpers/Data/weatherData';
 
+import './weather.scss';
+
+
 const printWeather = (currentWeather) => {
   const domstring = `
-    <p>${currentWeather[0].city_name}, ${currentWeather[0].state_code}</p>
-    <p>${currentWeather[0].temp}&degF</p>
-    <img src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png ">
-    <p>${currentWeather[0].weather.description}</p>
+    <h2 class="mt-3">Weather</h2>
+    <div class="card" style="width: 18rem;">
+    <div class="card-header">Current Weather</div>
+      <img class="card-img-top" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+      <div class="card-body">
+        <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
+        <p class="card-text">${currentWeather[0].temp}&degF</p>
+        <p class="card-text">${currentWeather[0].weather.description}</p>
+      </div>
+    </div>
   `;
   $('#weather').html(domstring);
 };
