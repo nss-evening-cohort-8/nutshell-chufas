@@ -7,6 +7,10 @@
     "storageBucket": "",
     "messagingSenderId": ""
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 491b739a06a61ec757305f1aef2eca4e968bcc18
   "weatherbitKeys" : {
     "apiKey" : ""
   }

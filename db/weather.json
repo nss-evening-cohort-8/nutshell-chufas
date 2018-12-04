@@ -1,12 +1,47 @@
 {
   "weather1": {
-    "userUid": "12345",
+    "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
     "zipcode": 94598,
-    "isCurrent": true
+    "isCurrent": false
   },
   "weather2": {
-    "userUid": "12345",
+    "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
     "zipcode": 37215,
     "isCurrent": false
+  },
+  "weather3" : {
+    "userUid" : "J8c1RcAHGdeFiV12USKwu1JnZDp1",
+    "zipcode" : 47374,
+    "isCurrent" : false
+  },
+  "weather4" : {
+    "userUid" : "f5AbEQreiRU6WbSWQ50U0cn1DVb2",
+    "zipcode" : 65619,
+    "isCurrent" : true
+  },
+  "weather5" : {
+    "userUid" : "AIf9KC05YxTppe9ofzYzkM0iv1p2",
+    "zipcode" : 20001,
+    "isCurrent" : false
+  },
+  "weather6" : {
+    "userUid" : "2vkrw1vCeCcjivd50n6WIczzu663",
+    "zipcode" : 37501,
+    "isCurrent" : false
+  },
+  "weather7" : {
+    "userUid" : "f5AbEQreiRU6WbSWQ50U0cn1DVb2",
+    "zipcode" : 47374,
+    "isCurrent" : false
+  },
+  "weather8" : {
+    "userUid" : "AIf9KC05YxTppe9ofzYzkM0iv1p2",
+    "zipcode" : 47374,
+    "isCurrent" : false
+  },
+    "weather9" : {
+    "userUid" : "2vkrw1vCeCcjivd50n6WIczzu663",
+    "zipcode" : 47374,
+    "isCurrent" : false
   }
 }
