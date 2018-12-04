@@ -21,4 +21,4 @@ const initApp = () => {
 
 initApp();
 
-export default { initApp };
+// export default { initApp };
