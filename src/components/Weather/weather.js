@@ -78,19 +78,28 @@ const getLocationsForDropdown = () => {
     });
 };
 
-// const getSingleLocation = (e) => {
-//   const locationId = e.target.id;
-//   const uid = authHelpers.getCurrentUid();
-//   weatherData.getSinglelocation(locationId)
-//     .then((singlelocation) => {
-//     })
-//     .catch((error) => {
-//       console.error('error in getting one friend', error);
-//     });
-// };
+const udpdateIsCurrent = (e) => {
+  const locationId = e.target.id;
+  weatherData.getSingleLocation(locationId)
+    .then((singleLocation) => {
+      const updatedLocation = {
+        userUid: singleLocation.userUid,
+        zipcode: singleLocation.zipcode,
+        isCurrent: true,
+      };
+      weatherData.updateIsCurrent(updatedLocation, locationId)
+        .then(() => {
+          $('#weather').html('');
+          weatherPage();
+        });
+    })
+    .catch((error) => {
+      console.error('error in getting single for completed', error);
+    });
+};
 
 const bindEvents = () => {
-  // $('body').on('click', '.get-location', getSingleLocation);
+  $('body').on('click', '.get-location', udpdateIsCurrent);
 };
 
 const initWeather = () => {
