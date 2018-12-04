@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable max-len */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
@@ -61,6 +62,7 @@ const printAllMessages = (messagesArray) => {
 
 const getAllMessages = () => {
   messageData.getAllMessages().then((messagesArray) => {
+    messagesArray.sort((first, second) => first.timestamp - second.timestamp);
     printAllMessages(messagesArray);
   });
 };
@@ -88,9 +90,11 @@ const addNewMessage = (e) => {
     messageHelpers.messageInputError();
   // if message is not an empty string
   } else if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput !== '')) {
-    messageData.addNewMessage(newMessageObject)
-      .then(() => {
+    messageData.addNewMessage(newMessageObject).then(() => {
         getAllMessages();
+        // $('#message-board-output').scrollIntoView(newMessageObject);
+        const test = $('.msg-row:las').id;
+        console.log(test);
         messageHelpers.resetMessageInput();
       })
       .catch((error) => {
