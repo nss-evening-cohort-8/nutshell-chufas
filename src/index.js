@@ -19,7 +19,7 @@ const initApp = () => {
   navbar.createNavbar();
   authHelpers.checkLoginStatus(weather.initWeather, messages, getArticles);
   auth.loginBtn();
-  $('#new-article').on('click', buildArticleForm.buildAddForm);
+  $('#add-article').on('click', buildArticleForm.buildAddForm());
 };
 
 initApp();

@@ -12,6 +12,7 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage) => {
       $('#articles').show();
       $('#messages').show();
       $('#weather').show();
+      $('#add-articles').show();
       initializeArticlesPage();
       messages();
       initWeather();
@@ -21,6 +22,7 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage) => {
       $('#articles').hide();
       $('#messages').hide();
       $('#weather').hide();
+      $('#add-articles').hide();
     }
   });
 };

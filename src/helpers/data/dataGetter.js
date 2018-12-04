@@ -21,6 +21,25 @@ const getAllArticlesFromDb = uid => new Promise((resolve, reject) => {
     });
 });
 
+const getSingleArticle = ArticleId => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/articles/${ArticleId}.json`)
+    .then((result) => {
+      const singleArticle = result.data;
+      singleArticle.id = ArticleId;
+      resolve(singleArticle);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const addNewArticle = ArticlesObject => axios.post(`${baseUrl}/articles.json`, JSON.stringify(ArticlesObject));
 
-export default { getAllArticlesFromDb, addNewArticle };
+const updateArticle = (articlesObject, articleId) => axios.put(`${baseUrl}/articles/${articleId}.json`, JSON.stringify(articlesObject));
+
+export default {
+  getAllArticlesFromDb,
+  addNewArticle,
+  getSingleArticle,
+  updateArticle,
+};
