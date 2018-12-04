@@ -4,6 +4,7 @@ import authHelpers from '../../../helpers/authHelpers';
 
 import getAllArticles from '../../../helpers/Data/dataGetter';
 import deleteIcon from '../../images/deleteIcon.jpeg';
+import event from '../AddEdit/addEditArticles';
 
 const creatCards = (articles) => {
   let domString = '';
@@ -22,26 +23,6 @@ const creatCards = (articles) => {
   $('#articles').html(domString);
 };
 
-const addArticleForm = () => {
-  let domString = '';
-  domString = `<form>
-  <div class="form-group">
-    <label for="input-title">Article Title</label>
-    <input type="text" class="form-control" id="input-title">
-  </div>
-  <div class="form-group">
-    <label for="inpute-synopsis">Synopsis</label>
-    <input type="text" class="form-control" id="input-synopsis">
-  </div>
-  <div class="form-group">
-    <label for="inpute-url">URL</label>
-    <input type="text" class="form-control" id="input-url">
-  </div>
-  <button type="submit" class="btn btn-primary" id="save-article">Save Article</button>
-</form>`;
-  $('#new-article').html(domString);
-};
-
 const getArticles = () => {
   const uid = authHelpers.getCurrentUid();
   getAllArticles.getAllArticlesFromDb(uid)
@@ -52,8 +33,9 @@ const getArticles = () => {
       console.error(error);
     });
 };
-$('body').on('click', '#add-articles', addArticleForm);
+
 const initializeArticlesPage = () => {
   getArticles();
+  event.bindEvent();
 };
 export default initializeArticlesPage;
