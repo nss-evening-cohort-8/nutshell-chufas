@@ -6,6 +6,7 @@ import './weather.scss';
 
 const printWeatherDropdown = (weatherArray) => {
   let dropdown = `
+    <h2 class="">Weather</h2>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Locations
@@ -24,14 +25,15 @@ const printWeatherDropdown = (weatherArray) => {
 
 const printWeather = (currentWeather) => {
   const domstring = `
-    <h2 class="mt-3">Weather</h2>
-    <div class="card" style="width: 18rem;">
-    <div class="card-header">Current Weather</div>
-      <img class="card-img-top" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
-      <div class="card-body">
-        <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
-        <p class="card-text">${currentWeather[0].temp}&degF</p>
-        <p class="card-text">${currentWeather[0].weather.description}</p>
+    <div class="row">
+      <div class="card col-8 mx-auto">
+      <div class="card-header">Current Conditions</div>
+        <img class="card-img-top" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+        <div class="card-body">
+          <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
+          <p class="card-text">${currentWeather[0].temp}&degF</p>
+          <p class="card-text">${currentWeather[0].weather.description}</p>
+        </div>
       </div>
     </div>
   `;
@@ -61,7 +63,6 @@ const weatherPage = () => {
     .then((currentWeather) => {
       if (currentWeather.length === 0) {
         printWeatherWarning();
-        $('#weather-warning').html('Please Select A Location!');
       } else {
         $('#weather-warning').html('');
         printWeather(currentWeather);

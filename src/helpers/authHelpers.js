@@ -11,7 +11,7 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage, bindEve
       $('#navbar-button-logout').show();
       $('#articles').show();
       $('#messages').show();
-      $('#weather').show();
+      $('#weather-container').show();
       initializeArticlesPage();
       messages();
       initWeather();
@@ -21,7 +21,7 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage, bindEve
       $('#navbar-button-logout').hide();
       $('#articles').hide();
       $('#messages').hide();
-      $('#weather').hide();
+      $('#weather-container').hide();
     }
   });
 };
