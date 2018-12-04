@@ -21,4 +21,6 @@ const getAllArticlesFromDb = uid => new Promise((resolve, reject) => {
     });
 });
 
-export default { getAllArticlesFromDb };
+const addNewArticle = ArticlesObject => axios.post(`${baseUrl}/articles.json`, JSON.stringify(ArticlesObject));
+
+export default { getAllArticlesFromDb, addNewArticle };

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import firebase from 'firebase/app';
 import 'bootstrap';
 
@@ -9,6 +10,7 @@ import authHelpers from './helpers/authHelpers';
 import getArticles from './components/NewsArticles/GetArticles/articles';
 import messages from './components/Messages/messages';
 import weather from './components/Weather/weather';
+import buildArticleForm from './components/NewsArticles/AddEdit/addEditArticles';
 
 import './index.scss';
 
@@ -17,8 +19,7 @@ const initApp = () => {
   navbar.createNavbar();
   authHelpers.checkLoginStatus(weather.initWeather, messages, getArticles);
   auth.loginBtn();
+  $('#new-article').on('click', buildArticleForm.buildAddForm);
 };
 
 initApp();
-
-// export default { initApp };
