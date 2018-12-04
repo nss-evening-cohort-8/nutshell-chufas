@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import messageHelpers from '../../helpers/messageHelpers';
 import authHelpers from '../../helpers/authHelpers';
-import messageData from '../../helpers/Data/messageData';
+import messageData from '../../helpers/data/messageData';
 
 const getMessageFromInput = () => {
   const message = {
@@ -24,10 +24,12 @@ const addNewMessage = (e) => {
     messageData.addNewMessage(newMessageObject)
       .then(() => {
         messageHelpers.resetMessageInput();
-        initMessagesPage();
+        // initMessagesPage();
       })
       .catch((error) => {
         console.error(error);
       });
   }
 };
+
+export default { addNewMessage };

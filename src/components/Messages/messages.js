@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
-import messageData from '../../helpers/Data/messageData';
+import messageData from '../../helpers/data/messageData';
 import messageHelpers from '../../helpers/messageHelpers';
 import './messages.scss';
 

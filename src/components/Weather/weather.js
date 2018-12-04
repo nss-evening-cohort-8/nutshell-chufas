@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
-import weatherData from '../../helpers/Data/weatherData';
+import weatherData from '../../helpers/data/weatherData';
 
 const printWeather = (currentWeather) => {
   const domstring = `
