@@ -7,7 +7,8 @@
     "storageBucket": "",
     "messagingSenderId": ""
   },
-  "weaterbitKeys" : {
+
+  "weatherbitKeys" : {
     "apiKey" : ""
   }
 }

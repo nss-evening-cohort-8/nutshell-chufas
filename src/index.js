@@ -7,13 +7,15 @@ import auth from './components/Auth/auth';
 import navbar from './components/Navbar/navbar';
 import authHelpers from './helpers/authHelpers';
 import getArticles from './components/NewsArticles/GetArticles/articles';
+import messages from './components/Messages/messages';
+import weather from './components/Weather/weather';
 
 import './index.scss';
 
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
-  authHelpers.checkLoginStatus(getArticles);
+  authHelpers.checkLoginStatus(weather.initWeather, messages, getArticles);
   auth.loginBtn();
 };
 
