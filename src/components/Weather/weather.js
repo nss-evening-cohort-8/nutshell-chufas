@@ -4,6 +4,23 @@ import weatherData from '../../helpers/Data/weatherData';
 
 import './weather.scss';
 
+const printWeatherDropdown = (weatherArray) => {
+  let dropdown = `
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Locations
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
+  if (weatherArray.length) {
+    weatherArray.forEach((location) => {
+      dropdown += `<div class="dropdown-item get-location" id=${location.id}>${location.zipcode}</div>`;
+    });
+  } else {
+    dropdown += '<div class="dropdown-item" >You Have No Locations</div>';
+  }
+  dropdown += '</div></div>';
+  $('#weather-dropdown').html(dropdown);
+};
 
 const printWeather = (currentWeather) => {
   const domstring = `
@@ -53,9 +70,34 @@ const weatherPage = () => {
     });
 };
 
+const getLocationsForDropdown = () => {
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getWeatherData(uid)
+    .then((weatherArray) => {
+      printWeatherDropdown(weatherArray);
+    });
+};
+
+// const getSingleLocation = (e) => {
+//   const locationId = e.target.id;
+//   const uid = authHelpers.getCurrentUid();
+//   weatherData.getSinglelocation(locationId)
+//     .then((singlelocation) => {
+//     })
+//     .catch((error) => {
+//       console.error('error in getting one friend', error);
+//     });
+// };
+
+const bindEvents = () => {
+  // $('body').on('click', '.get-location', getSingleLocation);
+};
+
 const initWeather = () => {
-  weatherPage();
   printWeatherWarning();
+  getLocationsForDropdown();
+  weatherPage();
+  bindEvents();
 };
 
 export default { initWeather };
