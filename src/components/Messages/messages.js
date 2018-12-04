@@ -74,7 +74,7 @@ const getMessageFromInput = () => {
   const message = {
     userUid: authHelpers.getCurrentUid(),
     message: $('#msg-input').val(),
-    timeStamp: messageHelpers.convertTimestamp(messageHelpers.getCurrentTimestamp()),
+    timestamp: messageHelpers.getCurrentTimestamp(),
     isEdited: false,
   };
   return message;
@@ -90,7 +90,7 @@ const addNewMessage = (e) => {
   } else if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput !== '')) {
     messageData.addNewMessage(newMessageObject)
       .then(() => {
-        initMessagesPage();
+        getAllMessages();
         messageHelpers.resetMessageInput();
       })
       .catch((error) => {
