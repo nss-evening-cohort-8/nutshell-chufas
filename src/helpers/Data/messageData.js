@@ -40,4 +40,6 @@ const getAllMessages = () => new Promise((resolve, reject) => {
     });
 });
 
-export default { getAllMessagesForCurrentUser, getAllMessages };
+const addNewMessage = messageObject => axios.post(`${baseUrl}/messages.json`, JSON.stringify(messageObject));
+
+export default { getAllMessagesForCurrentUser, getAllMessages, addNewMessage };
