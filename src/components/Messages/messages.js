@@ -36,7 +36,7 @@ const printAllMessages = (messagesArray) => {
           <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id}>
             <i class="far fa-edit"></i>
           </button>
-          <button type="button" class="del-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
+          <button type="button" class="delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
             <i class="far fa-trash-alt"></i></button>
         </div>
       </div>
@@ -64,7 +64,10 @@ const getAllMessages = () => {
   messageData.getAllMessages().then((messagesArray) => {
     messagesArray.sort((first, second) => first.timestamp - second.timestamp);
     printAllMessages(messagesArray);
-  });
+  })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const initMessagesPage = () => {
@@ -101,7 +104,18 @@ const addNewMessage = (e) => {
   }
 };
 
+const deleteMessage = (e) => {
+  const deleteMessageId = $(e.target).closest('.delete-btn').data('delete-btn-id');
+  messageData.deleteMessage(deleteMessageId).then(() => {
+    getAllMessages();
+  })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 $('body').on('keyup', '#msg-input', addNewMessage);
 $('body').on('click', '#msg-input-btn', addNewMessage);
+$('body').on('click', '.delete-btn', deleteMessage);
 
 export default initMessagesPage;

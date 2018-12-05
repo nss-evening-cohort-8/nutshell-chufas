@@ -87,7 +87,7 @@ const updateArticle = (e) => {
       console.error('error', error);
     });
 };
-$('body').on('click', '#add-article', addNewArticle );
+$('body').on('click', '#add-article', addNewArticle);
 $('body').on('click', '#edit-task', updateArticle);
 $('body').on('click', '.edit-btn', showEditForm);
 
