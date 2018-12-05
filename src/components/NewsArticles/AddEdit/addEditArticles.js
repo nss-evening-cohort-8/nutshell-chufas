@@ -30,6 +30,7 @@ const getArticlesFromForm = () => {
     ulr: $('#input-url').val(),
     uid: authHelpers.getCurrentUid(),
   };
+  console.log(article);
   return article;
 };
 
@@ -43,7 +44,8 @@ const buildAddForm = () => { // we need this function just to reuse fomBuilder
   let domString = '<h2>Add New Article</h2>';
   domString += formBuilder(emptyArticle);
   domString += '<button id="add-article">Add Article</button>';
-  $('#add-articles').html(domString).hide();
+  console.log(domString);
+  $('#add-articles').html(domString).show();
 };
 
 const addNewArticle = () => {
@@ -83,7 +85,7 @@ const updateArticle = (e) => {
       console.error('error', error);
     });
 };
-$('body').on('click', '#add-articles-btn', addNewArticle);
+$('body').on('click', '#add-article', addNewArticle);
 $('body').on('click', '#edit-task', updateArticle);
 $('body').on('click', '.edit-btn', showEditForm);
 
