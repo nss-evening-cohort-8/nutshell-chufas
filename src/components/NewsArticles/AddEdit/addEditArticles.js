@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import 'bootstrap';
 import authHelpers from '../../../helpers/authHelpers';
-// import initializeArticlesPage from '../GetArticles/articles';
+import initializeArticlesPage from '../GetArticles/articles';
 
 import getArticles from '../../../helpers/Data/dataGetter';
 
@@ -43,15 +43,15 @@ const buildAddForm = () => { // we need this function just to reuse fomBuilder
   let domString = '<h2>Add New Article</h2>';
   domString += formBuilder(emptyArticle);
   domString += '<button id="add-article">Add Article</button>';
-  $('#add-articles').html(domString).show();
+  $('#add-articles').html(domString).hide();
 };
 
 const addNewArticle = () => {
   const newArticle = getArticlesFromForm();
   getArticles.addNewArticle(newArticle)
     .then(() => {
-      $('#add-articles').html('').hide();
-    //   initializeArticlesPage();
+      $('#add-articles').show();
+      initializeArticlesPage();
     })
     .catch((error) => {
       console.error('error', error);
@@ -64,7 +64,7 @@ const showEditForm = (e) => {
     .then((singleArticle) => {
       let domString = '<h2>Edit Article</h2>';
       domString += formBuilder(singleArticle);
-      domString += `<button id="edit-task" data-single-edit-id=${singleArticle.id}>Save Article</button>`;
+      domString += `<button id="edit-task" data-single-edit-id="${singleArticle.id}">Save Article</button>`;
       $('#add-articles').html(domString).show();
     })
     .catch((error) => {
@@ -77,19 +77,14 @@ const updateArticle = (e) => {
   getArticles.updateArticle(updatedArticle, ArticleId)
     .then(() => {
       $('#add-articles').html('').hide();
-      // $('#single-container').html('');
-      // $('#tasks-collaction').show();
-    //   initializeArticlesPage();
+      initializeArticlesPage();
     })
     .catch((error) => {
       console.error('error', error);
     });
 };
-$('body').on('click', '#add-article', addNewArticle);
+$('body').on('click', '#add-articles-btn', addNewArticle);
 $('body').on('click', '#edit-task', updateArticle);
+$('body').on('click', '.edit-btn', showEditForm);
 
-const bindEvent = () => {
-  $('body').on('click', '.edit-btn', showEditForm);
-};
-
-export default { buildAddForm, bindEvent };
+export default { buildAddForm };

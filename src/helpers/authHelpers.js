@@ -12,7 +12,7 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage) => {
       $('#articles').show();
       $('#messages').show();
       $('#weather').show();
-      $('#add-articles').show();
+      $('#add-articles').hide();
       initializeArticlesPage();
       messages();
       initWeather();

@@ -4,11 +4,10 @@ import authHelpers from '../../../helpers/authHelpers';
 
 import getAllArticles from '../../../helpers/Data/dataGetter';
 import deleteIcon from '../../images/deleteIcon.jpeg';
-import event from '../AddEdit/addEditArticles';
 
 const creatCards = (articles) => {
   let domString = '';
-  domString += '<button class="btn-info edit-btn" id="add-articles">Add Articles</button>';
+  domString += '<button class="btn-info edit-btn" id="add-articles-btn">Add Articles</button>';
   articles.forEach((article) => {
     domString += `<div class="card" m-1 style="width: 40rem;">
     <div class="card-body">
@@ -36,6 +35,5 @@ const getArticles = () => {
 
 const initializeArticlesPage = () => {
   getArticles();
-  event.bindEvent();
 };
 export default initializeArticlesPage;

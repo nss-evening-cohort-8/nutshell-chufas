@@ -21,11 +21,12 @@ const getAllArticlesFromDb = uid => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleArticle = ArticleId => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/articles/${ArticleId}.json`)
+const getSingleArticle = articleId => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/articles/${articleId}.json`)
     .then((result) => {
       const singleArticle = result.data;
-      singleArticle.id = ArticleId;
+      singleArticle.id = articleId;
+      console.log(singleArticle);
       resolve(singleArticle);
     })
     .catch((error) => {
