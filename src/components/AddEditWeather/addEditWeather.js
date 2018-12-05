@@ -81,9 +81,19 @@ const addNewLocation = () => {
     });
 };
 
+const deleteWeather = (e) => {
+  console.log(e.target.id);
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getCurrentWeatherData(uid)
+    .then((weatherArray) => {
+      weatherData.deleteWeatherData(weatherArray.id);
+    });
+};
+
 const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
   $('body').on('click', '#add-weather-btn', showAddWeather);
+  $('body').on('click', '.delete-weather-btn', deleteWeather);
   $('body').on('click', '#save-location', addNewLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
   $('body').on('keyup', '#add-location', (e) => {
