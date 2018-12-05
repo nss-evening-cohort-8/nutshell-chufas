@@ -30,7 +30,7 @@ const printAllMessages = (messagesArray) => {
           <p class="text-center"><small>${messageHelpers.convertTimestamp(message.timestamp)}</small></p>
         </div>
         <div class="col-md-6">
-          <p class="text-left">${message.message}</p>
+          <p class="text-left msg-row-message">${message.message}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center align-items-center p-0">
           <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id}>
@@ -68,11 +68,6 @@ const getAllMessages = () => {
     .catch((err) => {
       console.error(err);
     });
-};
-
-const initMessagesPage = () => {
-  displayMsgInput();
-  getAllMessages();
 };
 
 const getMessageFromInput = () => {
@@ -115,8 +110,21 @@ const deleteMessage = (e) => {
     });
 };
 
+const isEditToTrue = (e) => {
+  const editMessageId = $(e.target).closest('.edit-btn').data('edit-btn-id');
+  console.log(editMessageId);
+  const editedMessageElement = $(e.target).parents().closest('.msg-row').find('.msg-row-message');
+  const editedMessage = $(editedMessageElement[0]).html();
+};
+
+const initMessagesPage = () => {
+  displayMsgInput();
+  getAllMessages();
+};
+
 $('body').on('keyup', '#msg-input', addNewMessage);
 $('body').on('click', '#msg-input-btn', addNewMessage);
 $('body').on('click', '.delete-btn', deleteMessage);
+$('body').on('click', '.edit-btn', changeMessageToInput);
 
 export default initMessagesPage;
