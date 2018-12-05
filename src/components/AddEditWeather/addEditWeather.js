@@ -3,8 +3,28 @@ import authHelpers from '../../helpers/authHelpers';
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
-const addWeather = (e) => {
+const showAddWeather = (e) => {
   console.log('Clicked!', e.target.id);
+  const emptyLocation = {
+    userUid: '',
+    zipcode: '',
+    isCurrent: '',
+  }
+};
+
+const showAddForm = () => {
+  const emptyFriend = {
+    name: '',
+    address: '',
+    phoneNumber: '',
+    email: '',
+    relationship: '',
+  };
+  let domString = '<h2>Add New Friend</h2>';
+  domString += formBuilder(emptyFriend);
+  domString += '<button id="save-friend">Save New Friend</button>';
+  $('#add-edit-friend').html(domString).show();
+  $('#friends').hide();
 };
 
 const updateCurrentLocation = (locationId) => {
@@ -31,7 +51,7 @@ const updateAllIsCurrent = (e) => {
 
 const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
-  $('body').on('click', '#add-weather-btn', addWeather);
+  $('body').on('click', '#add-weather-btn', showAddWeather);
 };
 
 export default { bindEvents };
