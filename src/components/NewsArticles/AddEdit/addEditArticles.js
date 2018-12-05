@@ -46,13 +46,15 @@ const buildAddForm = () => { // we need this function just to reuse fomBuilder
   domString += '<button id="add-article">Add Article</button>';
   console.log(domString);
   $('#add-articles').html(domString).show();
+  $('#articles').hide();
 };
 
 const addNewArticle = () => {
   const newArticle = getArticlesFromForm();
   getArticles.addNewArticle(newArticle)
     .then(() => {
-      $('#add-articles').show();
+      $('#add-articles').hide();
+      $('#articles').show();
       initializeArticlesPage();
     })
     .catch((error) => {
@@ -85,7 +87,7 @@ const updateArticle = (e) => {
       console.error('error', error);
     });
 };
-$('body').on('click', '#add-article', addNewArticle);
+$('body').on('click', '#add-article', addNewArticle );
 $('body').on('click', '#edit-task', updateArticle);
 $('body').on('click', '.edit-btn', showEditForm);
 
