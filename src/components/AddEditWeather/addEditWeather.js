@@ -59,8 +59,7 @@ const updateAllIsCurrent = (e) => {
     });
 };
 
-const addNewLocation = (e) => {
-  console.log('Clicked!', e.target.id);
+const addNewLocation = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
@@ -87,6 +86,11 @@ const bindEvents = () => {
   $('body').on('click', '#add-weather-btn', showAddWeather);
   $('body').on('click', '#save-location', addNewLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
+  $('body').on('keyup', '#add-location', (e) => {
+    if (e.keyCode === 13) {
+      addNewLocation();
+    }
+  });
 };
 
 export default { bindEvents };
