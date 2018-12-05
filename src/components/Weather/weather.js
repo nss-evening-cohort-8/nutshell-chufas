@@ -95,6 +95,7 @@ const getLocationsForDropdown = () => {
 };
 
 const initWeather = () => {
+  $('#add-location').hide();
   printWeatherWarning();
   getLocationsForDropdown();
   weatherPage();

@@ -15,11 +15,13 @@ const showAddWeather = () => {
       <div class="input-group-prepend">
         <div class="input-group-text">Zip Code</div>
       </div>    
-        <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Zip Code">
+        <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
     </div>
-    <div>
-      <button id="save-location" class="btn-success">Save New Location</button>
-    </div>     
+    <div class="row">
+      <button id="save-location" class="btn-success mx-auto">Save New Location</button>
+      <button id="cancel-add-location" class="btn-danger mx-auto">Cancel</button>      
+    </div>
+         
   </div>
   `;
   $('#add-location').html(domstring).show();
@@ -84,6 +86,7 @@ const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
   $('body').on('click', '#add-weather-btn', showAddWeather);
   $('body').on('click', '#save-location', addNewLocation);
+  $('body').on('click', '#cancel-add-location', weather.initWeather);
 };
 
 export default { bindEvents };
