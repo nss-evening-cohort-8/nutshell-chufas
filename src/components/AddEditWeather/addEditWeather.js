@@ -3,8 +3,7 @@ import authHelpers from '../../helpers/authHelpers';
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
-const showAddWeather = (e) => {
-  console.log('Clicked!', e.target.id);
+const showAddWeather = () => {
   const uid = authHelpers.getCurrentUid();
   const emptyLocation = {
     userUid: uid,
@@ -58,16 +57,26 @@ const updateAllIsCurrent = (e) => {
     });
 };
 
-const addNewLocation = () => {
-  updateAllIsCurrent();
-  const newLocation = getLocationFromForm();
-  weatherData.addNewLocation(newLocation)
+const addNewLocation = (e) => {
+  console.log('Clicked!', e.target.id);
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getCurrentWeatherData(uid)
+    .then((weatherArray) => {
+      console.log(weatherArray);
+      const current = false;
+      weatherData.updateIsCurrent(weatherArray.id, current);
+      const newLocation = getLocationFromForm();
+      return newLocation;
+    })
+    .then((newLocation) => {
+      weatherData.addNewLocation(newLocation);
+    })
     .then(() => {
       $('#add-location').html('').hide();
       weather.initWeather();
     })
     .catch((error) => {
-      console.error('error', error);
+      console.error(error);
     });
 };
 
