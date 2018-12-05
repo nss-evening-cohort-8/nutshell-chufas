@@ -16,10 +16,12 @@ const updateAllIsCurrent = (e) => {
     .then((weatherArray) => {
       weatherArray.forEach((location) => {
         let current = location.isCurrent;
-        current = false;
+        if (current === true) {
+          current = false;
+        }
         weatherData.updateIsCurrent(location.id, current);
+        updateCurrentLocation(locationId);
       });
-      updateCurrentLocation(locationId);
     });
 };
 
