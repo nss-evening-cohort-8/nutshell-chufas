@@ -42,4 +42,11 @@ const getAllMessages = () => new Promise((resolve, reject) => {
 
 const addNewMessage = messageObject => axios.post(`${baseUrl}/messages.json`, JSON.stringify(messageObject));
 
-export default { getAllMessagesForCurrentUser, getAllMessages, addNewMessage };
+const deleteMessage = messageId => axios.delete(`${baseUrl}/messages/${messageId}.json`);
+
+export default {
+  getAllMessagesForCurrentUser,
+  getAllMessages,
+  addNewMessage,
+  deleteMessage,
+};
