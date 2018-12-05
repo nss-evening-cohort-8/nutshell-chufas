@@ -7,15 +7,15 @@ const formBuilder = (event) => {
   const form = `
   <div class="form-group">
     <label for="form-event-title">Event:</label>
-    <input type="text" class="form-control" value ="${event.event}" id="form-event-title" placeholder="Enter Event Name">
+    <input type="text" class="form-control event-form" value ="${event.event}" id="form-event-title" placeholder="Enter Event Name">
   </div>
   <div class="form-group">
     <label for="form-event-startDate">Start Date:</label>
-    <input type="text" class="form-control" value ="${event.startDate}" id="form-event-startDate" placeholder="11/21/2018">
+    <input type="text" class="form-control event-form" value ="${event.startDate}" id="form-event-startDate" placeholder="11/21/2018">
   </div>
   <div class="form-group">
     <label for="form-event-location">Location:</label>
-    <input type="email" class="form-control" value ="${event.location}" id="form-event-location" placeholder="NSS">
+    <input type="email" class="form-control event-form" value ="${event.location}" id="form-event-location" placeholder="NSS">
   </div>`;
   return form;
 };
@@ -43,17 +43,35 @@ const buildAddForm = () => {
   $('#events').hide();
 };
 
+const emptyInputFields = () => {
+  $('.event-form').addClass('is-invalid');
+  $('.event-form').attr('placeholder', 'Please enter information');
+};
+
+const resetInputFields = () => {
+  $('.event-form').removeClass('is-invalid');
+};
+
 const addNewEvent = () => {
   const newEvent = gettingEventFromForm();
-  eventsData.addNewEvent(newEvent)
-    .then(() => {
-      $('#add-edit-event').html('').hide();
-      $('#events').show();
-      initializeEventsSection();
-    }).catch((error) => {
-      console.error(error);
-    });
+  const eventInput = newEvent.event;
+  const locationInput = newEvent.location;
+  const dateInput = newEvent.startDate;
+  if ((eventInput === '') || (locationInput === '') || (dateInput === '')) {
+    emptyInputFields();
+  } else {
+    resetInputFields();
+    eventsData.addNewEvent(newEvent)
+      .then(() => {
+        $('#add-edit-event').html('').hide();
+        $('#events').show();
+        initializeEventsSection();
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
 };
+
 
 $('body').on('click', '#add-new-event', addNewEvent);
 
