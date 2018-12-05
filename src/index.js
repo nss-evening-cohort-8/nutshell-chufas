@@ -9,15 +9,22 @@ import authHelpers from './helpers/authHelpers';
 import getArticles from './components/NewsArticles/GetArticles/articles';
 import messages from './components/Messages/messages';
 import weather from './components/Weather/weather';
+import initializeEventsSection from './components/EventsPage/eventsPage';
 import addEditWeather from './components/AddEditWeather/addEditWeather';
-
 import './index.scss';
+
+const initializeUserView = () => {
+  weather.initWeather();
+  messages();
+  getArticles();
+  addEditWeather.bindEvents();
+  initializeEventsSection();
+};
 
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
-  authHelpers.checkLoginStatus(weather.initWeather,
-    messages, getArticles, addEditWeather.bindEvents);
+  authHelpers.checkLoginStatus(initializeUserView);
   auth.loginBtn();
 };
 
