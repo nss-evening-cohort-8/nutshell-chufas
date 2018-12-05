@@ -101,7 +101,6 @@ const addNewMessage = (e) => {
 
 const deleteMessage = (e) => {
   const deleteMessageId = $(e.target).closest('.delete-btn').data('delete-btn-id');
-  console.log(deleteMessageId);
   messageData.deleteMessage(deleteMessageId).then(() => {
     getAllMessages();
   })

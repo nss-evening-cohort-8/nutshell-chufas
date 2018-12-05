@@ -3,7 +3,7 @@ import 'firebase/auth';
 import $ from 'jquery';
 // import allArticles from '../components/NewsArticles/GetArticles/articles';
 
-const checkLoginStatus = (initWeather, messages, initializeArticlesPage) => {
+const checkLoginStatus = (initWeather, messages, initializeArticlesPage, bindEvents) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#auth').hide();
@@ -11,16 +11,17 @@ const checkLoginStatus = (initWeather, messages, initializeArticlesPage) => {
       $('#navbar-button-logout').show();
       $('#articles').show();
       $('#messages').show();
-      $('#weather').show();
+      $('#weather-container').show();
       initializeArticlesPage();
       messages();
       initWeather();
+      bindEvents();
     } else {
       $('#navbar-button-auth').show();
       $('#navbar-button-logout').hide();
       $('#articles').hide();
       $('#messages').hide();
-      $('#weather').hide();
+      $('#weather-container').hide();
     }
   });
 };
