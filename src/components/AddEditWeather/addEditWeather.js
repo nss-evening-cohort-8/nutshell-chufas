@@ -63,7 +63,6 @@ const addNewLocation = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
-      console.log(weatherArray);
       const current = false;
       weatherData.updateIsCurrent(weatherArray.id, current);
       const newLocation = getLocationFromForm();
