@@ -3,6 +3,41 @@ import authHelpers from '../../helpers/authHelpers';
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
+const showAddWeather = () => {
+  const uid = authHelpers.getCurrentUid();
+  const emptyLocation = {
+    userUid: uid,
+    zipcode: '',
+    isCurrent: true,
+  };
+  const domstring = `<div class="form-group mt-5 row">
+    <div class="col-8 mx-auto">
+      <div class="input-group mb-2 mx-auto row">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Zip Code</div>
+        </div>    
+          <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
+      </div>
+      <div class="row">
+        <button id="save-location" class="btn-success mx-auto">Save New Location</button>
+        <button id="cancel-add-location" class="btn-danger mx-auto">Cancel</button>      
+      </div>
+    </div>         
+  </div>
+  `;
+  $('#add-location').html(domstring).show();
+};
+
+const getLocationFromForm = () => {
+  const uid = authHelpers.getCurrentUid();
+  const location = {
+    zipcode: $('#form-location-zip').val(),
+    userUid: uid,
+    isCurrent: true,
+  };
+  return location;
+};
+
 const updateCurrentLocation = (locationId) => {
   const current = true;
   weatherData.updateIsCurrent(locationId, current);
@@ -25,8 +60,37 @@ const updateAllIsCurrent = (e) => {
     });
 };
 
+const addNewLocation = () => {
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getCurrentWeatherData(uid)
+    .then((weatherArray) => {
+      const current = false;
+      weatherData.updateIsCurrent(weatherArray.id, current);
+      const newLocation = getLocationFromForm();
+      return newLocation;
+    })
+    .then((newLocation) => {
+      weatherData.addNewLocation(newLocation);
+    })
+    .then(() => {
+      $('#add-location').html('').hide();
+      weather.initWeather();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
+  $('body').on('click', '#add-weather-btn', showAddWeather);
+  $('body').on('click', '#save-location', addNewLocation);
+  $('body').on('click', '#cancel-add-location', weather.initWeather);
+  $('body').on('keyup', '#add-location', (e) => {
+    if (e.keyCode === 13) {
+      addNewLocation();
+    }
+  });
 };
 
 export default { bindEvents };
