@@ -2,7 +2,7 @@
   "weather1": {
     "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
     "zipcode": 94598,
-    "isCurrent": false
+    "isCurrent": true
   },
   "weather2": {
     "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
