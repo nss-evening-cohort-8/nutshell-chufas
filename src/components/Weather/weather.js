@@ -7,7 +7,7 @@ import './weather.scss';
 const printWeatherDropdown = (weatherArray) => {
   let dropdown = `
     <div class="dropdown row mx-auto">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle mr-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Locations
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
