@@ -3,6 +3,10 @@ import authHelpers from '../../helpers/authHelpers';
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
+const addWeather = (e) => {
+  console.log('Clicked!', e.target.id);
+};
+
 const updateCurrentLocation = (locationId) => {
   const current = true;
   weatherData.updateIsCurrent(locationId, current);
@@ -27,6 +31,7 @@ const updateAllIsCurrent = (e) => {
 
 const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
+  $('body').on('click', '#add-weather-btn', addWeather);
 };
 
 export default { bindEvents };

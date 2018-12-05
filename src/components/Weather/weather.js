@@ -6,8 +6,7 @@ import './weather.scss';
 
 const printWeatherDropdown = (weatherArray) => {
   let dropdown = `
-    <h2 class="">Weather</h2>
-    <div class="dropdown">
+    <div class="dropdown row mx-auto">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Locations
     </button>
@@ -19,6 +18,9 @@ const printWeatherDropdown = (weatherArray) => {
   } else {
     dropdown += '<div class="dropdown-item" >You Have No Locations</div>';
   }
+  dropdown += '</div>';
+  dropdown += '<div>';
+  dropdown += '<button id="add-weather-btn" type="button" class="btn btn-success">+</button>';
   dropdown += '</div></div>';
   $('#weather-dropdown').html(dropdown);
 };
