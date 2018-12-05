@@ -36,18 +36,6 @@ const getLocationFromForm = () => {
   return location;
 };
 
-const addNewLocation = () => {
-  const newLocation = getLocationFromForm();
-  weatherData.addNewLocation(newLocation)
-    .then(() => {
-      $('#add-location').html('').hide();
-      weather.initWeather();
-    })
-    .catch((error) => {
-      console.error('error', error);
-    });
-};
-
 const updateCurrentLocation = (locationId) => {
   const current = true;
   weatherData.updateIsCurrent(locationId, current);
@@ -67,6 +55,19 @@ const updateAllIsCurrent = (e) => {
         weatherData.updateIsCurrent(location.id, current);
         updateCurrentLocation(locationId);
       });
+    });
+};
+
+const addNewLocation = () => {
+  updateAllIsCurrent();
+  const newLocation = getLocationFromForm();
+  weatherData.addNewLocation(newLocation)
+    .then(() => {
+      $('#add-location').html('').hide();
+      weather.initWeather();
+    })
+    .catch((error) => {
+      console.error('error', error);
     });
 };
 
