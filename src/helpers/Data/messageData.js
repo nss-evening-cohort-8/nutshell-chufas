@@ -44,9 +44,12 @@ const addNewMessage = messageObject => axios.post(`${baseUrl}/messages.json`, JS
 
 const deleteMessage = messageId => axios.delete(`${baseUrl}/messages/${messageId}.json`);
 
+const updateMessage = (messageId, messageObject) => axios.patch(`${baseUrl}/messages/${messageId}.json`, JSON.stringify(messageObject));
+
 export default {
   getAllMessagesForCurrentUser,
   getAllMessages,
   addNewMessage,
   deleteMessage,
+  updateMessage,
 };
