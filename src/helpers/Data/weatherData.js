@@ -67,7 +67,7 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     });
 });
 
-const addNewWeather = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
+const addNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
 
 const updateIsCurrent = (locationId, isCurrent) => axios.patch(`${firebaseUrl}/weather/${locationId}.json`, { isCurrent });
 
@@ -78,5 +78,5 @@ export default {
   getSingleLocation,
   getCurrentWeather,
   updateIsCurrent,
-  addNewWeather,
+  addNewLocation,
 };
