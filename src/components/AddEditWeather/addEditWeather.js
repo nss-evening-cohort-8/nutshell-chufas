@@ -10,18 +10,19 @@ const showAddWeather = () => {
     zipcode: '',
     isCurrent: true,
   };
-  const domstring = `<div class="form-group mt-5">
-    <div class="input-group mb-2 mx-auto">
-      <div class="input-group-prepend">
-        <div class="input-group-text">Zip Code</div>
-      </div>    
-        <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
-    </div>
-    <div class="row">
-      <button id="save-location" class="btn-success mx-auto">Save New Location</button>
-      <button id="cancel-add-location" class="btn-danger mx-auto">Cancel</button>      
-    </div>
-         
+  const domstring = `<div class="form-group mt-5 row">
+    <div class="col-8 mx-auto">
+      <div class="input-group mb-2 mx-auto row">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Zip Code</div>
+        </div>    
+          <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
+      </div>
+      <div class="row">
+        <button id="save-location" class="btn-success mx-auto">Save New Location</button>
+        <button id="cancel-add-location" class="btn-danger mx-auto">Cancel</button>      
+      </div>
+    </div>         
   </div>
   `;
   $('#add-location').html(domstring).show();

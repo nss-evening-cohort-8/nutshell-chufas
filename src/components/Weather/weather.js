@@ -27,10 +27,12 @@ const printWeatherDropdown = (weatherArray) => {
 
 const printWeather = (currentWeather) => {
   const domstring = `
-    <div class="row">
-      <div class="card col-8 mx-auto">
+    <div class="row weather-card ">
+      <div class="card col-6 mx-auto">
       <div class="card-header">Current Conditions</div>
-        <img class="card-img-top" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+      <div class="card-img-div">
+        <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+      </div>  
         <div class="card-body">
           <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
           <p class="card-text">${currentWeather[0].temp}&degF</p>
