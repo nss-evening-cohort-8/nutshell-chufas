@@ -1,14 +1,26 @@
 {
   "event1": {
-    "userUid": "12345",
+    "userUid": "f5AbEQreiRU6WbSWQ50U0cn1DVb2",
     "event": "Bonfire at the beach",
     "startDate": 1528763298535,
     "location": "Ocean Beach"
   },
   "event2": {
-    "userUid": "12345",
+    "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
     "event": "Nap",
     "startDate": 1528763298536,
-    "location": "NSS"
+    "location": "Home"
+  },
+  "event3": {
+    "userUid": "AIf9KC05YxTppe9ofzYzkM0iv1p2",
+    "event": "Take a vacation",
+    "startDate": 1528763298536,
+    "location": "Bahamas"
+  },
+  "event4": {
+    "userUid": "2vkrw1vCeCcjivd50n6WIczzu663",
+    "event": "Play tennis",
+    "startDate": 1528763298536,
+    "location": "Tennis Courts"
   }
 }
