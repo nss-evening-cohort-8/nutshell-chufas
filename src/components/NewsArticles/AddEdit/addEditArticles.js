@@ -17,7 +17,7 @@ const formBuilder = (articles) => {
     </div>
     <div class="form-group">
       <label for="inpute-url">URL</label>
-      <input type="text" class="form-control" value="${articles.url}" id="input-url">
+      <input type="url" name="url" class="form-control" value="${articles.url}" id="input-url">
     </div>
   </form>`;
   return form;
@@ -27,7 +27,7 @@ const getArticlesFromForm = () => {
   const article = {
     title: $('#input-title').val(),
     synopsis: $('#input-synopsis').val(),
-    ulr: $('#input-url').val(),
+    url: $('#input-url').val(),
     uid: authHelpers.getCurrentUid(),
   };
   console.log(article);
