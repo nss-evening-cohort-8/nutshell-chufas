@@ -115,10 +115,10 @@ const changeMessageToInput = (e) => {
   const editedMessage = $(editedMessageElement[0]).html();
   const isEdited = $(e.target).closest('.edit-btn').data('is-edited');
   if (isEdited === true) {
-    const editedString = editedMessage.split(' ');
-    editedString.splice(-1, 1);
+    // const editedString = editedMessage.split(' ');
+    editedMessage.remove('<small>(edited)</small>');
     // console.log(removedEditedText);
-    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedString}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
   } else {
     $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
   }
