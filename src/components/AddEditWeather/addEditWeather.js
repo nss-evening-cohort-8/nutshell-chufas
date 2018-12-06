@@ -82,7 +82,6 @@ const addNewLocation = () => {
 };
 
 const deleteWeather = () => {
-  console.log('CLICKED!');
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
