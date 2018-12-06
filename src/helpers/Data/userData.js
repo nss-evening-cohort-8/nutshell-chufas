@@ -1,2 +1,6 @@
 import axios from 'axios';
-import firebase from ''
+import apiKeys from '../../../db/apiKeys.json';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
+
+// const getUser = uid
