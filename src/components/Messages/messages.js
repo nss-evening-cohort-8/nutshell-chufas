@@ -33,7 +33,7 @@ const printAllMessages = (messagesArray) => {
           <p class="text-left msg-row-message">${message.isEdited === true ? `${message.message} <small>(edited)</small>` : message.message}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center align-items-center p-0">
-          <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id}>
+          <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id} data-is-edited=${message.isEdited}>
             <i class="far fa-edit"></i>
           </button>
           <button type="button" class="delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
@@ -113,7 +113,15 @@ const changeMessageToInput = (e) => {
   const editMessageId = $(e.target).closest('.edit-btn').data('edit-btn-id');
   const editedMessageElement = $(e.target).parents().closest('.msg-row').find('.msg-row-message');
   const editedMessage = $(editedMessageElement[0]).html();
-  $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
+  const isEdited = $(e.target).closest('.edit-btn').data('is-edited');
+  if (isEdited === true) {
+    const editedString = editedMessage.split(' ');
+    editedString.splice(-1, 1);
+    // console.log(removedEditedText);
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedString}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
+  } else {
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
+  }
 };
 
 const saveEditedMessage = (e) => {
