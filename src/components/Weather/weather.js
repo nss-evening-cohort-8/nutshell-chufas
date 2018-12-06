@@ -26,7 +26,6 @@ const printWeatherDropdown = (weatherArray) => {
 };
 
 const printWeather = (currentWeather) => {
-  console.log(currentWeather.postal_code);
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
@@ -103,7 +102,7 @@ const weatherPage = () => {
 //         { 'latLng': point },
 //         function (res, status) {
 //                   var zip = res[0].formatted_address.match(/,\s\w{2}\s(\d{5})/);
-//                   $("#location").val(zip);          
+//                   $("#location").val(zip);
 //               }
 //       );
 //     });

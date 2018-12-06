@@ -64,6 +64,7 @@ const addNewLocation = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
+      console.log(weatherArray);
       const current = false;
       weatherData.updateIsCurrent(weatherArray.id, current);
       const newLocation = getLocationFromForm();
@@ -80,6 +81,14 @@ const addNewLocation = () => {
       console.error(error);
     });
 };
+
+// const addNewLocation =() => {
+//   const uid = authHelpers.getCurrentUid();
+//   weatherData.getCurrentWeatherData(uid)
+//   .then((weatherArray)=> {
+//     if (weatherArray)
+//   })
+// }
 
 const deleteWeather = () => {
   const uid = authHelpers.getCurrentUid();
