@@ -39,7 +39,7 @@ const printWeather = (currentWeather) => {
           <p class="card-text">${currentWeather[0].weather.description}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center">
-          <button type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
+          <button id="delete-weather-btn" type="button" class=" btn btn-danger btn-sm mb-2">
             <i class="far fa-trash-alt"></i></button>
         </div>
       </div>

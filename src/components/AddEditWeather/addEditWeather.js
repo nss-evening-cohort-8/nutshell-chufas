@@ -61,10 +61,10 @@ const updateAllIsCurrent = (e) => {
 };
 
 const addNewLocation = () => {
+  console.log('CLICKED ADD!!!');
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
-      console.log(weatherArray);
       const current = false;
       weatherData.updateIsCurrent(weatherArray.id, current);
       const newLocation = getLocationFromForm();
@@ -82,14 +82,6 @@ const addNewLocation = () => {
     });
 };
 
-// const addNewLocation =() => {
-//   const uid = authHelpers.getCurrentUid();
-//   weatherData.getCurrentWeatherData(uid)
-//   .then((weatherArray)=> {
-//     if (weatherArray)
-//   })
-// }
-
 const deleteWeather = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
@@ -101,8 +93,8 @@ const deleteWeather = () => {
 
 const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
-  $('body').on('click', '.add-weather-btn', showAddWeather);
-  $('body').on('click', '.delete-weather-btn', deleteWeather);
+  $('body').on('click', '#add-weather-btn', showAddWeather);
+  $('body').on('click', '#delete-weather-btn', deleteWeather);
   $('body').on('click', '#save-location', addNewLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
   $('body').on('keyup', '#add-location', (e) => {
