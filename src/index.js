@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import firebase from 'firebase/app';
 import 'bootstrap';
 import $ from 'jquery';
