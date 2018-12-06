@@ -69,9 +69,25 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
 
 const addNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
 
-const updateIsCurrent = (locationId, isCurrent) => axios.patch(`${firebaseUrl}/weather/${locationId}.json`, { isCurrent });
+const updateIsCurrent = (locationId, isCurrent) => new Promise((resolve, reject) => {
+  axios.patch(`${firebaseUrl}/weather/${locationId}.json`, { isCurrent })
+    .then((result) => {
+      resolve(result);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
 
-const deleteWeatherData = weatherId => axios.delete(`${firebaseUrl}/weather/${weatherId}.json`);
+const deleteWeatherData = weatherId => new Promise((resolve, reject) => {
+  axios.delete(`${firebaseUrl}/weather/${weatherId}.json`)
+    .then((result) => {
+      resolve(result);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
 
 export default {
   getWeatherData,

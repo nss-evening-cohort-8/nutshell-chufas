@@ -39,8 +39,9 @@ const printWeather = (currentWeather) => {
           <p class="card-text">${currentWeather[0].weather.description}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center">
-          <button id="delete-weather-btn" type="button" class=" btn btn-danger btn-sm mb-2">
-            <i class="far fa-trash-alt"></i></button>
+          <button type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
+            <i class="far fa-trash-alt"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -91,46 +92,6 @@ const weatherPage = () => {
       console.error('error in getting weather', error);
     });
 };
-
-// const getBrowserLocation = () => {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition((position) => {
-//       const lat = position.coords.latitude;
-//       const long = position.coords.longitude;
-//       const point = new google.maps.LatLng(lat, long);
-//       new google.maps.Geocoder().geocode(
-//         { 'latLng': point },
-//         function (res, status) {
-//                   var zip = res[0].formatted_address.match(/,\s\w{2}\s(\d{5})/);
-//                   $("#location").val(zip);
-//               }
-//       );
-//     });
-//   }
-// };
-
-// const weatherPage = () => {
-//   const uid = authHelpers.getCurrentUid();
-//   weatherData.getCurrentWeatherData(uid)
-//     .then((weatherArray) => {
-//       if (weatherArray.length === 0) {
-//         getBrowserLocation();
-//       } else {
-//         weatherData.getCurrentWeather(weatherArray.zipcode)
-//           .then((currentWeather) => {
-//             if (currentWeather.length === 0) {
-//               printWeatherWarning();
-//             } else {
-//               $('#weather-warning').html('');
-//               printWeather(currentWeather);
-//             }
-//           })
-//           .catch((error) => {
-//             console.error('error in getting weather', error);
-//           });
-//       }
-//     });
-// };
 
 const getLocationsForDropdown = () => {
   const uid = authHelpers.getCurrentUid();
