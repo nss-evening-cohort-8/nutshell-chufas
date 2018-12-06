@@ -30,10 +30,10 @@ const printAllMessages = (messagesArray) => {
           <p class="text-center"><small>${messageHelpers.convertTimestamp(message.timestamp)}</small></p>
         </div>
         <div class="col-md-6">
-          <p class="text-left">${message.message}</p>
+          <p class="text-left msg-row-message">${message.isEdited === true ? `${message.message} <small>(edited)</small>` : message.message}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center align-items-center p-0">
-          <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id}>
+          <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id} data-is-edited=${message.isEdited} data-original-timestamp=${message.timestamp}>
             <i class="far fa-edit"></i>
           </button>
           <button type="button" class="delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
@@ -51,7 +51,7 @@ const printAllMessages = (messagesArray) => {
           <p class="text-center"><small>${messageHelpers.convertTimestamp(message.timestamp)}</small></p>
         </div>
         <div class="col-md-6">
-          <p class="text-left">${message.message}</p>
+          <p class="text-left">${message.isEdited === true ? `${message.message} <small>(edited)</small>` : message.message}</p>
         </div>
       </div>
       <hr>`;
@@ -70,12 +70,7 @@ const getAllMessages = () => {
     });
 };
 
-const initMessagesPage = () => {
-  displayMsgInput();
-  getAllMessages();
-};
-
-const getMessageFromInput = () => {
+const getObjectFromInput = () => {
   const message = {
     userUid: authHelpers.getCurrentUid(),
     message: $('#msg-input').val(),
@@ -86,7 +81,7 @@ const getMessageFromInput = () => {
 };
 
 const addNewMessage = (e) => {
-  const newMessageObject = getMessageFromInput();
+  const newMessageObject = getObjectFromInput();
   const messageInput = newMessageObject.message;
   // if message is an empty string
   if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput === '')) {
@@ -114,8 +109,46 @@ const deleteMessage = (e) => {
     });
 };
 
+const changeMessageToInput = (e) => {
+  const editedMessageElement = $(e.target).parents().closest('.msg-row').find('.msg-row-message');
+  const editedMessage = $(editedMessageElement[0]).html();
+  const editMessageId = $(e.target).closest('.edit-btn').data('edit-btn-id');
+  const isEdited = $(e.target).closest('.edit-btn').data('is-edited');
+  const originalTimestamp = $(e.target).closest('.edit-btn').data('original-timestamp');
+  if (isEdited === true) {
+    const editedString = editedMessage.split(' ');
+    editedString.splice(-1, 1);
+    // console.log(removedEditedText);
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedString}" data-edit-input-id=${editMessageId} data-orig-timestamp=${originalTimestamp} class="form-control edit-input">`);
+  } else {
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
+  }
+};
+
+const saveEditedMessage = (e) => {
+  if (e.keyCode === 13) {
+    const editMessageId = $(e.target).data('edit-input-id');
+    const editedObject = {
+      userUid: authHelpers.getCurrentUid(),
+      message: $(e.target).val(),
+      timestamp: $(e.target).data('orig-timestamp'),
+      isEdited: true,
+    };
+    messageData.updateMessage(editMessageId, editedObject).then(() => {
+      getAllMessages();
+    });
+  }
+};
+
+const initMessagesPage = () => {
+  displayMsgInput();
+  getAllMessages();
+};
+
 $('body').on('keyup', '#msg-input', addNewMessage);
 $('body').on('click', '#msg-input-btn', addNewMessage);
 $('body').on('click', '.delete-btn', deleteMessage);
+$('body').on('click', '.edit-btn', changeMessageToInput);
+$('body').on('keyup', '.edit-input', saveEditedMessage);
 
 export default initMessagesPage;
