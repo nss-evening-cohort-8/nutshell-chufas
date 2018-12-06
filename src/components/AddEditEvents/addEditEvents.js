@@ -36,9 +36,12 @@ const buildAddForm = () => {
     startDate: '',
     location: '',
   };
-  let domString = '<h2> Add New Event</h2>';
+  let domString = '<div class="add-form">';
+  domString += '<button class="btn btn-danger" id="back-add-button">back</button>';
+  domString += '<h2> Add New Event</h2>';
   domString += formBuilder(emptyEvent);
   domString += '<button class="btn btn-primary" id="add-new-event">Save New Event</button>';
+  domString += '</div>';
   $('#add-edit-event').html(domString).show();
   $('#events').hide();
 };
@@ -72,7 +75,51 @@ const addNewEvent = () => {
   }
 };
 
+// Edit
+const showEditForm = (e) => {
+  const idtoEdit = e.target.dataset.editId;
+  eventsData.getSingleEvent(idtoEdit)
+    .then((singleEvent) => {
+      let domString = '<div class="edit-form">';
+      domString += '<button class="btn btn-danger" id="back-edit-button">back</button>';
+      domString += '<h2> Edit Event</h2>';
+      domString += formBuilder(singleEvent);
+      domString += `<button id="edit-event" class="btn btn-primary" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
+      domString += '</div>';
+      $('#add-edit-event').html(domString).show();
+      $('#events').hide();
+    }).catch((error) => {
+      console.error(error);
+    });
+};
+
+const updateEvent = (e) => {
+  const updatedEvent = gettingEventFromForm();
+  const eventId = e.target.dataset.singleEditId;
+  eventsData.updateEvent(updatedEvent, eventId)
+    .then(() => {
+      $('#add-edit-event').html('').hide();
+      $('#events').show();
+      initializeEventsSection();
+    }).catch((error) => {
+      console.error(error);
+    });
+};
+
+const bringEventsBackFromAdd = () => {
+  $('.add-form').hide();
+  $('#events').show();
+};
+
+const bringEventsBack = () => {
+  $('.edit-form').hide();
+  $('#events').show();
+};
 
 $('body').on('click', '#add-new-event', addNewEvent);
+$('body').on('click', '.edit-button', showEditForm);
+$('body').on('click', '#edit-event', updateEvent);
+$('body').on('click', '#back-add-button', bringEventsBackFromAdd);
+$('body').on('click', '#back-edit-button', bringEventsBack);
 
 export default buildAddForm;

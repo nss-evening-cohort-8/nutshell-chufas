@@ -12,6 +12,7 @@ const checkLoginStatus = (initializeUserView) => {
       $('#articles').show();
       $('#messages').show();
       $('#weather-container').show();
+      $('#events').show();
       initializeUserView();
     } else {
       $('#navbar-button-auth').show();
@@ -19,6 +20,7 @@ const checkLoginStatus = (initializeUserView) => {
       $('#articles').hide();
       $('#messages').hide();
       $('#weather-container').hide();
+      $('#events').hide();
     }
   });
 };
