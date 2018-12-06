@@ -16,6 +16,7 @@ const printAllEvents = (eventsArray) => {
                         <p class="card-text">${event.startDate}</p>
                         <p class="card-text">${event.location}</p>
                         <input class="delete-button pt-1" data-delete-id=${event.id} type="image" src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/56-512.png" width="20px"></input>    
+                        <input class="edit-button pt-1 ml-2" data-edit-id=${event.id} type="image" src="http://www.iconarchive.com/download/i49407/designcontest/outline/Pencil.ico" width="20px"></input>
                         </div>
                     </div>`;
       domString += '</div>';

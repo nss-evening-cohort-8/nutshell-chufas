@@ -33,6 +33,19 @@ const getArticles = () => {
     });
 };
 
+const deleteArticle = (e) => {
+  const idToDelete = e.target.dataset.deleteId;
+  getAllArticles.deleteArticle(idToDelete)
+    .then(() => {
+      getArticles();
+    })
+    .catch((error) => {
+      console.log('error in deleting friend', error);
+    });
+};
+
+$('body').on('click', '.delete-btn', deleteArticle);
+
 const initializeArticlesPage = () => {
   getArticles();
 };
