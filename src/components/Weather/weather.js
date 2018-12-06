@@ -76,20 +76,57 @@ const printWeatherWarning = () => {
     });
 };
 
+// const weatherPage = () => {
+//   const uid = authHelpers.getCurrentUid();
+//   weatherData.getCurrentWeatherData(uid)
+//     .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
+//     .then((currentWeather) => {
+//       if (currentWeather.length === 0) {
+//         printWeatherWarning();
+//       } else {
+//         $('#weather-warning').html('');
+//         printWeather(currentWeather);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('error in getting weather', error);
+//     });
+// };
+
+const getBrowserLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        var point = new google.maps.LatLng(lat, long);
+        new google.maps.Geocoder().geocode(
+            {'latLng': point},
+            function (res, status) {
+                var zip = res[0].formatted_address.match(/,\s\w{2}\s(\d{5})/);
+                $("#location").val(zip);
+  }
+};
+
 const weatherPage = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
-    .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
-    .then((currentWeather) => {
-      if (currentWeather.length === 0) {
-        printWeatherWarning();
+    .then((weatherArray) => {
+      if (weatherArray.length === 0) {
+        getBrowserLocation();
       } else {
-        $('#weather-warning').html('');
-        printWeather(currentWeather);
+        weatherData.getCurrentWeather(weatherArray.zipcode)
+          .then((currentWeather) => {
+            if (currentWeather.length === 0) {
+              printWeatherWarning();
+            } else {
+              $('#weather-warning').html('');
+              printWeather(currentWeather);
+            }
+          })
+          .catch((error) => {
+            console.error('error in getting weather', error);
+          });
       }
-    })
-    .catch((error) => {
-      console.error('error in getting weather', error);
     });
 };
 
