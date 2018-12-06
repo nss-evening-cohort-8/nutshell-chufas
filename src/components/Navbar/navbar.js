@@ -25,7 +25,19 @@ const createNavbar = () => {
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto"> 
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a id="navbar-button-weather" class="nav-link">Weather</a>
+      </li> 
+      <li class="nav-item">
+        <a id="navbar-button-events" class="nav-link">Events</a>
+      </li> 
+      <li class="nav-item">
+        <a id="navbar-button-articles" class="nav-link">Articles</a>
+      </li> 
+      <li class="nav-item">
+        <a id="navbar-button-messages" class="nav-link">Messages</a>
+      </li>  
       <li class="nav-item">
         <a id="navbar-button-logout" class="nav-link">Logout</a>
       </li>                 
