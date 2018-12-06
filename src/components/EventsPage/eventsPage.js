@@ -1,10 +1,8 @@
 import $ from 'jquery';
 import eventData from '../../helpers/Data/eventData';
 import authHepers from '../../helpers/authHelpers';
-import form from '../AddEditEvents/addEditEvents';
 
 const printAllEvents = (eventsArray) => {
-  console.log(eventsArray);
   let domString = '';
   domString += '<h5> Events</h5>';
   domString += '<div class="event-card">';
@@ -26,17 +24,12 @@ const eventsSection = () => {
   const uid = authHepers.getCurrentUid();
   eventData.getAllEvents(uid)
     .then((eventsArray) => {
-      console.log(eventsArray);
       printAllEvents(eventsArray);
     }).catch((error) => {
       console.error(error);
     });
 };
 
-$('body').on('click', '#add-events', () => {
-  $('.event-card').hide();
-  form.buildAddForm();
-});
 
 const initializeEventsSection = () => {
   eventsSection();
