@@ -38,9 +38,12 @@ const addNewArticle = ArticlesObject => axios.post(`${baseUrl}/articles.json`, J
 
 const updateArticle = (articlesObject, articleId) => axios.put(`${baseUrl}/articles/${articleId}.json`, JSON.stringify(articlesObject));
 
+const deleteArticle = articleId => axios.delete(`${baseUrl}/articles/${articleId}.json`);
+
 export default {
   getAllArticlesFromDb,
   addNewArticle,
   getSingleArticle,
   updateArticle,
+  deleteArticle,
 };
