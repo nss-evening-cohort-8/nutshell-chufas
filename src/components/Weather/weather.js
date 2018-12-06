@@ -25,7 +25,7 @@ const printWeatherDropdown = (weatherArray) => {
   $('#weather-dropdown').html(dropdown);
 };
 
-const printWeather = (currentWeather) => {
+const printWeather = (currentWeather, currentId) => {
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
@@ -39,7 +39,7 @@ const printWeather = (currentWeather) => {
           <p class="card-text">${currentWeather[0].weather.description}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center">
-          <button type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
+          <button id="${currentId}" type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
             <i class="far fa-trash-alt"></i>
           </button>
         </div>
@@ -103,9 +103,9 @@ const getLocationsForDropdown = () => {
 
 const initWeather = () => {
   $('#add-location').hide();
-  printWeatherWarning();
   getLocationsForDropdown();
   weatherPage();
+  printWeatherWarning();
 };
 
 export default { initWeather };

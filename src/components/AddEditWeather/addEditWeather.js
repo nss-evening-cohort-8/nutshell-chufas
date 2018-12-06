@@ -87,6 +87,8 @@ const deleteWeather = () => {
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
       weatherData.deleteWeatherData(weatherArray.id);
+    })
+    .then(() => {
       weather.initWeather();
     })
     .catch((error) => {
