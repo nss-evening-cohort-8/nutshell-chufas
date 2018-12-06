@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import weatherData from '../../helpers/Data/weatherData';
+// eslint-disable-next-line import/no-cycle
+import addEditWeather from '../AddEditWeather/addEditWeather';
 
 import './weather.scss';
 
@@ -16,6 +18,22 @@ const printWeatherDropdown = (weatherArray) => {
       dropdown += `<div class="dropdown-item get-location" id=${location.id}>${location.zipcode}</div>`;
     });
   } else {
+    $('#weather').html('');
+    $('#weather-dropdown').hide();
+    addEditWeather.showAddWeather();
+    addEditWeather.showFirstLocationBtn();
+    $('.save-location-btns').hide();
+    const domstring = `
+          <div class="row">
+            <div class="card col-8 mx-auto">
+            <div class="card-header">Current Conditions</div>
+              <div class="card-body">
+                <h5 class="card-title">Please Add A Location For Weather!</h5>
+              </div>
+            </div>
+          </div>          
+          `;
+    $('#weather-warning').html(domstring);
     dropdown += '<div class="dropdown-item" >You Have No Locations</div>';
   }
   dropdown += '</div>';

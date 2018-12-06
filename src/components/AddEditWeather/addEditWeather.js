@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
+// eslint-disable-next-line import/no-cycle
 import weather from '../Weather/weather';
 import weatherData from '../../helpers/Data/weatherData';
 
@@ -18,7 +19,7 @@ const showAddWeather = () => {
         </div>    
           <input type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
       </div>
-      <div class="row">
+      <div class="row save-location-btns">
         <button id="save-location" class="btn-success mx-auto">Save New Location</button>
         <button id="cancel-add-location" class="btn-danger mx-auto">Cancel</button>      
       </div>
@@ -26,6 +27,14 @@ const showAddWeather = () => {
   </div>
   `;
   $('#add-location').html(domstring).show();
+};
+
+const showFirstLocationBtn = () => {
+  const domstring = `
+        <div class="row add-location-btns">
+        <button id="add-first-location" class="btn-success mx-auto">Save New Location</button>
+      </div>`;
+  $('#first-location-btn').html(domstring).show();
 };
 
 const getLocationFromForm = () => {
@@ -60,7 +69,22 @@ const updateAllIsCurrent = (e) => {
     });
 };
 
-const addNewLocation = () => {
+const addFirstLocation = () => {
+  const firstLocation = getLocationFromForm();
+  console.log(firstLocation);
+  weatherData.addNewLocation(firstLocation)
+    .then(() => {
+      $('#add-location').html('').hide();
+      $('#first-location-btn').hide();
+      $('#weather-dropdown').show();
+      weather.initWeather();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+const addLocation = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
@@ -99,13 +123,14 @@ const bindEvents = () => {
   $('body').on('click', '.get-location', updateAllIsCurrent);
   $('body').on('click', '#add-weather-btn', showAddWeather);
   $('body').on('click', '.delete-weather-btn', deleteWeather);
-  $('body').on('click', '#save-location', addNewLocation);
+  $('body').on('click', '#save-location', addLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
+  $('body').on('click', '#add-first-location', addFirstLocation);
   $('body').on('keyup', '#add-location', (e) => {
     if (e.keyCode === 13) {
-      addNewLocation();
+      addLocation();
     }
   });
 };
 
-export default { bindEvents };
+export default { bindEvents, showAddWeather, showFirstLocationBtn };
