@@ -61,7 +61,6 @@ const updateAllIsCurrent = (e) => {
 };
 
 const addNewLocation = () => {
-  console.log('CLICKED ADD!!!');
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
@@ -71,11 +70,11 @@ const addNewLocation = () => {
       return newLocation;
     })
     .then((newLocation) => {
-      weatherData.addNewLocation(newLocation);
-    })
-    .then(() => {
-      $('#add-location').html('').hide();
-      weather.initWeather();
+      weatherData.addNewLocation(newLocation)
+        .then(() => {
+          $('#add-location').html('').hide();
+          weather.initWeather();
+        });
     })
     .catch((error) => {
       console.error(error);
@@ -86,10 +85,10 @@ const deleteWeather = () => {
   const uid = authHelpers.getCurrentUid();
   weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
-      weatherData.deleteWeatherData(weatherArray.id);
-    })
-    .then(() => {
-      weather.initWeather();
+      weatherData.deleteWeatherData(weatherArray.id)
+        .then(() => {
+          weather.initWeather();
+        });
     })
     .catch((error) => {
       console.error(error);
