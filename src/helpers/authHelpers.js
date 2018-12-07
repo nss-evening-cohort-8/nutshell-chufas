@@ -31,4 +31,6 @@ const checkLoginStatus = (initializeUserView) => {
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-export default { checkLoginStatus, getCurrentUid };
+const getCurrentUserName = () => firebase.auth().currentUser.displayName;
+
+export default { checkLoginStatus, getCurrentUid, getCurrentUserName };
