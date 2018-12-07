@@ -16,11 +16,11 @@ const messages = () => {
   $('#navbar-button-messages').attr('href', '#messages');
 };
 
-const bindEvents = () => {
+const navbarBindEvents = () => {
   $('body').on('click', weather);
   $('body').on('click', events);
   $('body').on('click', articles);
   $('body').on('click', messages);
 };
 
-export default bindEvents;
+export default navbarBindEvents;

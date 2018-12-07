@@ -12,7 +12,7 @@ import buildArticleForm from './components/NewsArticles/AddEdit/addEditArticles'
 import initializeEventsSection from './components/EventsPage/eventsPage';
 import addEditWeather from './components/AddEditWeather/addEditWeather';
 import showAddForm from './components/AddEditEvents/addEditEvents';
-import bindEvents from './helpers/navbarEvents';
+import navbarBindEvents from './helpers/navbarEvents';
 import './index.scss';
 
 const initializeUserView = () => {
@@ -21,14 +21,14 @@ const initializeUserView = () => {
   getArticles();
   addEditWeather.bindEvents();
   initializeEventsSection();
+  navbarBindEvents();
 };
 
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
-  authHelpers.checkLoginStatus(initializeUserView);
   auth.loginBtn();
-  bindEvents();
+  authHelpers.checkLoginStatus(initializeUserView);
   $('body').on('click', '#add-articles-btn', buildArticleForm.buildAddForm);
   $('body').on('click', '#add-events', showAddForm);
 };
