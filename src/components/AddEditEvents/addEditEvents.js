@@ -2,12 +2,13 @@ import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import eventsData from '../../helpers/Data/eventData';
 import initializeEventsSection from '../EventsPage/eventsPage';
+import eventsHelper from '../../helpers/eventsHelpers';
 
 const formBuilder = (event) => {
   const form = `
   <div class="form-group">
     <label for="form-event-title">Event:</label>
-    <input type="text" class="form-control event-form" value ="${event.event}" id="form-event-title" placeholder="Enter Event Name">
+    <input type="text" class="form-control event-form" value ="${event.event}" id="form-event-title" placeholder="Enter Event Name" autofocus>
   </div>
   <div class="form-group">
     <label for="form-event-startDate">Start Date:</label>
@@ -20,12 +21,15 @@ const formBuilder = (event) => {
   return form;
 };
 
+// Add Event
 const gettingEventFromForm = () => {
+  const currentTime = eventsHelper.timeStamp();
   const event = {
     event: $('#form-event-title').val(),
     startDate: $('#form-event-startDate').val(),
     location: $('#form-event-location').val(),
     userUid: authHelpers.getCurrentUid(),
+    created: currentTime,
   };
   return event;
 };
@@ -35,6 +39,7 @@ const buildAddForm = () => {
     event: '',
     startDate: '',
     location: '',
+    created: '',
   };
   let domString = '<div class="add-form">';
   domString += '<button class="btn btn-danger" id="back-add-button">back</button>';
@@ -46,24 +51,15 @@ const buildAddForm = () => {
   $('#events').hide();
 };
 
-const emptyInputFields = () => {
-  $('.event-form').addClass('is-invalid');
-  $('.event-form').attr('placeholder', 'Please enter information');
-};
-
-const resetInputFields = () => {
-  $('.event-form').removeClass('is-invalid');
-};
-
 const addNewEvent = () => {
   const newEvent = gettingEventFromForm();
   const eventInput = newEvent.event;
   const locationInput = newEvent.location;
   const dateInput = newEvent.startDate;
   if ((eventInput === '') || (locationInput === '') || (dateInput === '')) {
-    emptyInputFields();
+    eventsHelper.emptyInputFields();
   } else {
-    resetInputFields();
+    eventsHelper.resetInputFields();
     eventsData.addNewEvent(newEvent)
       .then(() => {
         $('#add-edit-event').html('').hide();
@@ -75,7 +71,7 @@ const addNewEvent = () => {
   }
 };
 
-// Edit
+// Edit Event
 const showEditForm = (e) => {
   const idtoEdit = e.target.dataset.editId;
   eventsData.getSingleEvent(idtoEdit)
@@ -106,20 +102,9 @@ const updateEvent = (e) => {
     });
 };
 
-const bringEventsBackFromAdd = () => {
-  $('.add-form').hide();
-  $('#events').show();
-};
-
-const bringEventsBack = () => {
-  $('.edit-form').hide();
-  $('#events').show();
-};
-
 $('body').on('click', '#add-new-event', addNewEvent);
 $('body').on('click', '.edit-button', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
-$('body').on('click', '#back-add-button', bringEventsBackFromAdd);
-$('body').on('click', '#back-edit-button', bringEventsBack);
+
 
 export default buildAddForm;
