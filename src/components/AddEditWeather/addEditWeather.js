@@ -124,11 +124,11 @@ const addLocation = () => {
       return newLocation;
     })
     .then((newLocation) => {
-      weatherData.addNewLocation(newLocation)
-        .then(() => {
-          weather.initWeather();
-          $('#add-location').html('').hide();
-        });
+      weatherData.addNewLocation(newLocation);
+    })
+    .then(() => {
+      weather.initWeather();
+      $('#add-location').html('').hide();
     })
     .catch((error) => {
       console.error(error);
