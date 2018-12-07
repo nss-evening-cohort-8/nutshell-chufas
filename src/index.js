@@ -14,6 +14,23 @@ import addEditWeather from './components/AddEditWeather/addEditWeather';
 import showAddForm from './components/AddEditEvents/addEditEvents';
 import './index.scss';
 
+const getCurrentZip = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const long = position.coords.longitude;
+      const point = new google.maps.LatLng(lat, long);
+      new google.maps.Geocoder().geocode(
+        { 'latLng': point },
+        (res, status) => {
+          const zip = res[0].formatted_address.match(/,\s\w{2}\s(\d{5})/);
+          $('#weather').val(zip);
+        },
+      );
+    })
+  }
+};
+
 const initializeUserView = () => {
   weather.initWeather();
   messages();
@@ -27,6 +44,7 @@ const initApp = () => {
   navbar.createNavbar();
   authHelpers.checkLoginStatus(initializeUserView);
   auth.loginBtn();
+  getCurrentZip();
   $('body').on('click', '#add-articles-btn', buildArticleForm.buildAddForm);
   $('body').on('click', '#add-events', showAddForm);
 };
