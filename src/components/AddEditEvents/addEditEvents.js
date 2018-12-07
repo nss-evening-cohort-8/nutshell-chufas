@@ -2,6 +2,7 @@ import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import eventsData from '../../helpers/Data/eventData';
 import initializeEventsSection from '../EventsPage/eventsPage';
+import timeStamp from '../../helpers/eventsTimeStamp';
 
 const formBuilder = (event) => {
   const form = `
@@ -21,11 +22,13 @@ const formBuilder = (event) => {
 };
 
 const gettingEventFromForm = () => {
+  const currentTime = timeStamp();
   const event = {
     event: $('#form-event-title').val(),
     startDate: $('#form-event-startDate').val(),
     location: $('#form-event-location').val(),
     userUid: authHelpers.getCurrentUid(),
+    created: currentTime,
   };
   return event;
 };
@@ -35,6 +38,7 @@ const buildAddForm = () => {
     event: '',
     startDate: '',
     location: '',
+    created: '',
   };
   let domString = '<div class="add-form">';
   domString += '<button class="btn btn-danger" id="back-add-button">back</button>';
