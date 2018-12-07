@@ -11,11 +11,11 @@ const formBuilder = (event) => {
   </div>
   <div class="form-group">
     <label for="form-event-startDate">Start Date:</label>
-    <input type="text" class="form-control event-form" value ="${event.startDate}" id="form-event-startDate" placeholder="11/21/2018">
+    <input type="text" class="form-control event-form" value ="${event.startDate}" id="form-event-startDate" placeholder="mm/dd/yyyy">
   </div>
   <div class="form-group">
     <label for="form-event-location">Location:</label>
-    <input type="email" class="form-control event-form" value ="${event.location}" id="form-event-location" placeholder="NSS">
+    <input type="email" class="form-control event-form" value ="${event.location}" id="form-event-location" placeholder="Enter Location">
   </div>`;
   return form;
 };

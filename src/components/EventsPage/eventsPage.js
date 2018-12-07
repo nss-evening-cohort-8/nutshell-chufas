@@ -31,6 +31,17 @@ const eventsSection = () => {
   const uid = authHepers.getCurrentUid();
   eventsData.getAllEvents(uid)
     .then((eventsArray) => {
+      eventsArray.sort((a, b) => {
+        const nameA = a.event.toUpperCase();
+        const nameB = b.event.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
       printAllEvents(eventsArray);
     }).catch((error) => {
       console.error(error);
