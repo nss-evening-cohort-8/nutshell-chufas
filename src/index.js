@@ -12,7 +12,6 @@ import buildArticleForm from './components/NewsArticles/AddEdit/addEditArticles'
 import initializeEventsSection from './components/EventsPage/eventsPage';
 import addEditWeather from './components/AddEditWeather/addEditWeather';
 import showAddForm from './components/AddEditEvents/addEditEvents';
-import navbarBindEvents from './helpers/navbarEvents';
 import './index.scss';
 
 const initializeUserView = () => {
@@ -21,7 +20,6 @@ const initializeUserView = () => {
   getArticles();
   addEditWeather.bindEvents();
   initializeEventsSection();
-  navbarBindEvents();
 };
 
 const initApp = () => {
