@@ -58,27 +58,6 @@ const updateCurrentLocation = (locationId) => {
     });
 };
 
-const updateAllIsCurrent = (e) => {
-  const locationId = e.target.id;
-  const uid = authHelpers.getCurrentUid();
-  weatherData.getWeatherData(uid)
-    .then((weatherArray) => {
-      weatherArray.forEach((location) => {
-        let current = location.isCurrent;
-        if (current === true) {
-          current = false;
-        }
-        weatherData.updateIsCurrent(location.id, current)
-          .then(() => {
-            updateCurrentLocation(locationId);
-          })
-          .catch((error) => {
-            console.error('error updating all to false', error);
-          });
-      });
-    });
-};
-
 // const updateAllIsCurrent = (e) => {
 //   const locationId = e.target.id;
 //   const uid = authHelpers.getCurrentUid();
@@ -89,28 +68,46 @@ const updateAllIsCurrent = (e) => {
 //         if (current === true) {
 //           current = false;
 //         }
-//         weatherData.updateIsCurrent(location.id, current);
+//         weatherData.updateIsCurrent(location.id, current)
+//           .then(() => {
+//             updateCurrentLocation(locationId);
+//           })
+//           .catch((error) => {
+//             console.error('error updating all to false', error);
+//           });
 //       });
-//     })
-//     .then(() => {
-//       updateCurrentLocation(locationId);
-//     })
-//     .catch((error) => {
-//       console.error('error updating all to false', error);
 //     });
 // };
 
+const updateAllIsCurrent = (e) => {
+  const locationId = e.target.id;
+  const uid = authHelpers.getCurrentUid();
+  weatherData.getWeatherData(uid)
+    .then((weatherArray) => {
+      weatherArray.forEach((location) => {
+        let current = location.isCurrent;
+        if (current === true) {
+          current = false;
+        }
+        weatherData.updateIsCurrent(location.id, current);
+      });
+    })
+    .then(() => {
+      updateCurrentLocation(locationId);
+    })
+    .catch((error) => {
+      console.error('error updating all to false', error);
+    });
+};
+
 const addFirstLocation = () => {
   const firstLocation = getLocationFromForm();
-  console.log(firstLocation);
   weatherData.addNewLocation(firstLocation)
     .then(() => {
+      weather.initWeather();
       $('#add-location').html('').hide();
       $('#first-location-btn').hide();
-      $('#weather-dropdown').show()
-        .then(() => {
-          weather.initWeather();
-        });
+      $('#weather-dropdown').show();
     })
     .catch((error) => {
       console.error(error);
@@ -129,8 +126,8 @@ const addLocation = () => {
     .then((newLocation) => {
       weatherData.addNewLocation(newLocation)
         .then(() => {
-          $('#add-location').html('').hide();
           weather.initWeather();
+          $('#add-location').html('').hide();
         });
     })
     .catch((error) => {
