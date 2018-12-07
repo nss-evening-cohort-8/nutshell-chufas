@@ -120,10 +120,10 @@ const getLocationsForDropdown = () => {
 };
 
 const initWeather = () => {
-  $('#add-location').hide();
   getLocationsForDropdown();
   weatherPage();
   printWeatherWarning();
+  $('#add-location').hide();
 };
 
 export default { initWeather };

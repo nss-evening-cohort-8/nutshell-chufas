@@ -49,8 +49,13 @@ const getLocationFromForm = () => {
 
 const updateCurrentLocation = (locationId) => {
   const current = true;
-  weatherData.updateIsCurrent(locationId, current);
-  weather.initWeather();
+  weatherData.updateIsCurrent(locationId, current)
+    .then(() => {
+      weather.initWeather();
+    })
+    .catch((error) => {
+      console.error('error updating current location', error);
+    });
 };
 
 const updateAllIsCurrent = (e) => {
@@ -63,11 +68,37 @@ const updateAllIsCurrent = (e) => {
         if (current === true) {
           current = false;
         }
-        weatherData.updateIsCurrent(location.id, current);
-        updateCurrentLocation(locationId);
+        weatherData.updateIsCurrent(location.id, current)
+          .then(() => {
+            updateCurrentLocation(locationId);
+          })
+          .catch((error) => {
+            console.error('error updating all to false', error);
+          });
       });
     });
 };
+
+// const updateAllIsCurrent = (e) => {
+//   const locationId = e.target.id;
+//   const uid = authHelpers.getCurrentUid();
+//   weatherData.getWeatherData(uid)
+//     .then((weatherArray) => {
+//       weatherArray.forEach((location) => {
+//         let current = location.isCurrent;
+//         if (current === true) {
+//           current = false;
+//         }
+//         weatherData.updateIsCurrent(location.id, current);
+//       });
+//     })
+//     .then(() => {
+//       updateCurrentLocation(locationId);
+//     })
+//     .catch((error) => {
+//       console.error('error updating all to false', error);
+//     });
+// };
 
 const addFirstLocation = () => {
   const firstLocation = getLocationFromForm();
@@ -76,8 +107,10 @@ const addFirstLocation = () => {
     .then(() => {
       $('#add-location').html('').hide();
       $('#first-location-btn').hide();
-      $('#weather-dropdown').show();
-      weather.initWeather();
+      $('#weather-dropdown').show()
+        .then(() => {
+          weather.initWeather();
+        });
     })
     .catch((error) => {
       console.error(error);
@@ -126,11 +159,17 @@ const bindEvents = () => {
   $('body').on('click', '#save-location', addLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
   $('body').on('click', '#add-first-location', addFirstLocation);
-  $('body').on('keyup', '#add-location', (e) => {
-    if (e.keyCode === 13) {
-      addLocation();
-    }
-  });
+  // $('body').on('keyup', '#add-location', (e) => {
+  //   if (e.keyCode === 13) {
+  //     addLocation();
+  //   }
+  // });
+  // $('body').on('keyup', '#add-first-location', (e) => {
+  //   if (e.keyCode === 13) {
+  //     console.log('first loc enter!');
+  //     addFirstLocation();
+  //   }
+  // });
 };
 
 export default { bindEvents, showAddWeather, showFirstLocationBtn };
