@@ -9,7 +9,7 @@ const events = () => {
 };
 
 const articles = () => {
-  $('#navbar-button-articles').attr('href', '#articles');
+  $('#navbar-button-articles').attr('href', '#articles-container');
 };
 
 const messages = () => {

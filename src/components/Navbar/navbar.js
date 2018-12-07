@@ -11,15 +11,25 @@ const navbarEvents = () => {
       }).catch((err) => {
         console.error('you are still logged in', err);
       });
+    } else if ((e.target.id === 'navbar-button-weather') || (e.target.id === 'navbar-button-events') || (e.target.id === 'navbar-button-articles') || (e.target.id === 'navbar-button-messages')) {
+      $('#auth').hide();
+      $('#weather-container').show();
+      $('#events-container').show();
+      $('#articles').show();
+      $('#messages').show();
     } else {
       $('#auth').show();
+      $('#weather-container').hide();
+      $('#events-container').hide();
+      $('#articles').hide();
+      $('#messages').hide();
     }
   });
 };
 
 const createNavbar = () => {
   const domString = `
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main-nav">
   <a class="navbar-brand text-light">Chufas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

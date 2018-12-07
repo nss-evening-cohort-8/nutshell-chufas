@@ -31,7 +31,6 @@ const eventsSection = () => {
   const uid = authHepers.getCurrentUid();
   eventsData.getAllEvents(uid)
     .then((eventsArray) => {
-      console.log(eventsArray);
       eventsArray.sort((a, b) => {
         const nameA = a.event.toUpperCase();
         const nameB = b.event.toUpperCase();

@@ -1,3 +1,12 @@
-// #google-auth {
-//   display: none;
-// }
+#main-nav {
+  position: fixed !important;
+  top: 0;
+  z-index: 1;
+  width:100%;
+}
+ #events-container, #messages {
+   padding-top:55px;
+}
+#weather-container, #articles-container {
+  padding-top : 70px;
+}
