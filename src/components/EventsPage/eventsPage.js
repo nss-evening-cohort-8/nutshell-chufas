@@ -32,7 +32,7 @@ const eventsSection = () => {
   const uid = authHepers.getCurrentUid();
   eventsData.getAllEvents(uid)
     .then((eventsArray) => {
-      eventsArray.sort((a, b) => a.created - b.created);
+      eventsArray.sort((a, b) => new Date(b.created) - new Date(a.created));
       printAllEvents(eventsArray);
     }).catch((error) => {
       console.error(error);
