@@ -3,6 +3,7 @@ import apiKeys from '../../../db/apiKeys.json';
 
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
 const weatherbitKey = apiKeys.weatherbitKeys.apiKey;
+const zipcodeKey = apiKeys.zipcodeKeys.apiKey;
 
 const getWeatherData = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
@@ -67,6 +68,16 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     });
 });
 
+const getCity = zipcode => new Promise((resolve, reject) => {
+  axios.get(`https://www.zipcodeapi.com/rest/${zipcodeKey}/info.json/${zipcode}/degrees`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const addNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
 
 const updateIsCurrent = (locationId, isCurrent) => new Promise((resolve, reject) => {
@@ -97,4 +108,5 @@ export default {
   updateIsCurrent,
   addNewLocation,
   deleteWeatherData,
+  getCity,
 };
