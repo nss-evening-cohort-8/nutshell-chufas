@@ -3,7 +3,9 @@ import 'firebase/auth';
 import $ from 'jquery';
 // import allArticles from '../components/NewsArticles/GetArticles/articles';
 
-const checkLoginStatus = (initializeUserView) => {
+const getCurrentUid = () => firebase.auth().currentUser.uid;
+
+const checkLoginStatus = (initializeUserView, getUserName) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#auth').hide();
@@ -16,6 +18,7 @@ const checkLoginStatus = (initializeUserView) => {
       $('#weather-container').show();
       $('#events').show();
       initializeUserView();
+      getUserName(getCurrentUid);
     } else {
       $('#navbar-button-auth').show();
       $('#navbar-button-logout').hide();
@@ -28,8 +31,6 @@ const checkLoginStatus = (initializeUserView) => {
     }
   });
 };
-
-const getCurrentUid = () => firebase.auth().currentUser.uid;
 
 const getCurrentUserName = () => firebase.auth().currentUser.displayName;
 
