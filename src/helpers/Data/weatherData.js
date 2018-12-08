@@ -58,15 +58,15 @@ const getCurrentWeatherData = uid => new Promise((resolve, reject) => {
     });
 });
 
-const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
-  axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
-    .then((results) => {
-      resolve(results.data.data);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
+// const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
+//   axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
+//     .then((results) => {
+//       resolve(results.data.data);
+//     })
+//     .catch((error) => {
+//       reject(error);
+//     });
+// });
 
 const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
   const zip = zipcode;
@@ -74,13 +74,18 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     .then((results) => {
       const currentWeatherObject = results.data.data;
       const currentWeatherArray = [];
-      if (currentWeatherObject !== null) { 
+      if (currentWeatherObject !== null) {
         Object.keys(currentWeatherObject).forEach((location) => {
           location.zipcode = zip;
-        })
-      }     
+          currentWeatherArray.push(location);
+        });
+        resolve(currentWeatherArray);
+      }
     })
-})   
+    .catch((error) => {
+      reject(error);
+    });
+});
 // const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
 //   const zip = zipcode;
 //   axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
