@@ -13,7 +13,7 @@ const printAllEvents = (eventsArray) => {
         domString += '<div class="row">';
       }
       domString += `<div class="card border-secondary mb-3" id="event-card" style="max-width: 18rem;">
-                      <div class="card-header">${event.event}</div>
+                      <h5 class="card-header">${event.event}</h5>
                       <div class="card-body">
                         <p class="card-text">${event.startDate}</p>
                         <p class="card-text">${event.location}</p>
