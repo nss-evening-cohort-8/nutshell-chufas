@@ -2,25 +2,29 @@
   "event1": {
     "userUid": "f5AbEQreiRU6WbSWQ50U0cn1DVb2",
     "event": "Bonfire at the beach",
-    "startDate": 1528763298535,
-    "location": "Ocean Beach"
+    "startDate": "06/21/2018",
+    "location": "Ocean Beach",
+    "created": "12/07/2018, 09:48:30 AM"
   },
   "event2": {
     "userUid": "J8c1RcAHGdeFiV12USKwu1JnZDp1",
     "event": "Nap",
-    "startDate": 1528763298536,
-    "location": "Home"
+    "startDate": "12/21/2018",
+    "location": "Home",
+    "created": "12/07/2018, 10:48:30 AM"
   },
   "event3": {
     "userUid": "AIf9KC05YxTppe9ofzYzkM0iv1p2",
     "event": "Take a vacation",
-    "startDate": 1528763298536,
-    "location": "Bahamas"
+    "startDate": "11/21/2019",
+    "location": "Bahamas",
+    "created": "12/07/2018, 09:48:30 AM"
   },
   "event4": {
     "userUid": "2vkrw1vCeCcjivd50n6WIczzu663",
     "event": "Play tennis",
-    "startDate": 1528763298536,
-    "location": "Tennis Courts"
+    "startDate": "04/11/2019",
+    "location": "Tennis Courts",
+    "created": "12/07/2018, 1:48:30 PM"
   }
 }

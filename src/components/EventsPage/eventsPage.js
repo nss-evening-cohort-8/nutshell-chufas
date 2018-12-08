@@ -17,7 +17,8 @@ const printAllEvents = (eventsArray) => {
                         <p class="card-text">${event.location}</p>
                         <input class="delete-button pt-1" data-delete-id=${event.id} type="image" src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/56-512.png" width="20px"></input>    
                         <input class="edit-button pt-1 ml-2" data-edit-id=${event.id} type="image" src="http://www.iconarchive.com/download/i49407/designcontest/outline/Pencil.ico" width="20px"></input>
-                        </div>
+                      </div>
+                      <div class="card-footer text-muted" >${event.created}</div>
                     </div>`;
       domString += '</div>';
     });
@@ -31,6 +32,7 @@ const eventsSection = () => {
   const uid = authHepers.getCurrentUid();
   eventsData.getAllEvents(uid)
     .then((eventsArray) => {
+      eventsArray.sort((a, b) => new Date(b.created) - new Date(a.created));
       printAllEvents(eventsArray);
     }).catch((error) => {
       console.error(error);

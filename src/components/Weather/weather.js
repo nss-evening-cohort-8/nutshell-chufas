@@ -20,8 +20,7 @@ const printWeatherDropdown = (weatherArray) => {
   } else {
     $('#weather').html('');
     $('#weather-dropdown').hide();
-    addEditWeather.showAddWeather();
-    addEditWeather.showFirstLocationBtn();
+    addEditWeather.showAddFirstWeather();
     $('.save-location-btns').hide();
     const domstring = `
           <div class="row">
@@ -43,7 +42,7 @@ const printWeatherDropdown = (weatherArray) => {
   $('#weather-dropdown').html(dropdown);
 };
 
-const printWeather = (currentWeather, currentId) => {
+const printWeather = (currentWeather, currentCity) => {
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
@@ -52,12 +51,12 @@ const printWeather = (currentWeather, currentId) => {
         <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
       </div>  
         <div class="card-body">
-          <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
+          <h5 class="card-title">${currentCity.city}, ${currentCity.state}</h5>
           <p class="card-text">${currentWeather[0].temp}&degF</p>
           <p class="card-text">${currentWeather[0].weather.description}</p>
         </div>
         <div class="col-md-1 d-flex justify-content-center">
-          <button id="${currentId}" type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
+          <button type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
             <i class="far fa-trash-alt"></i>
           </button>
         </div>
@@ -69,7 +68,7 @@ const printWeather = (currentWeather, currentId) => {
 
 const printWeatherWarning = () => {
   const uid = authHelpers.getCurrentUid();
-  weatherData.getWeatherData(uid)
+  return weatherData.getWeatherData(uid)
     .then((weatherArray) => {
       const isTrueArray = [];
       weatherArray.forEach((weatherDataSet) => {
@@ -95,16 +94,24 @@ const printWeatherWarning = () => {
 };
 
 const weatherPage = () => {
+  let currentLocationArray = '';
   const uid = authHelpers.getCurrentUid();
-  weatherData.getCurrentWeatherData(uid)
-    .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
-    .then((currentWeather) => {
-      if (currentWeather.length === 0) {
-        printWeatherWarning();
-      } else {
-        $('#weather-warning').html('');
-        printWeather(currentWeather);
-      }
+  return weatherData.getCurrentWeatherData(uid)
+    .then((weatherArray) => {
+      currentLocationArray = weatherArray;
+      weatherData.getCurrentWeather(currentLocationArray.zipcode)
+        .then((currentWeather) => {
+          if (currentWeather.length === 0) {
+            printWeatherWarning();
+          } else {
+            $('#weather-warning').html('');
+            // printWeather(currentWeather);
+          }
+          weatherData.getCity(currentLocationArray.zipcode)
+            .then((currentCity) => {
+              printWeather(currentWeather, currentCity);
+            });
+        });
     })
     .catch((error) => {
       console.error('error in getting weather', error);
@@ -113,7 +120,7 @@ const weatherPage = () => {
 
 const getLocationsForDropdown = () => {
   const uid = authHelpers.getCurrentUid();
-  weatherData.getWeatherData(uid)
+  return weatherData.getWeatherData(uid)
     .then((weatherArray) => {
       printWeatherDropdown(weatherArray);
     });
