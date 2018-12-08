@@ -20,8 +20,7 @@ const printWeatherDropdown = (weatherArray) => {
   } else {
     $('#weather').html('');
     $('#weather-dropdown').hide();
-    addEditWeather.showAddWeather();
-    addEditWeather.showFirstLocationBtn();
+    addEditWeather.showAddFirstWeather();
     $('.save-location-btns').hide();
     const domstring = `
           <div class="row">
@@ -69,7 +68,7 @@ const printWeather = (currentWeather, currentId) => {
 
 const printWeatherWarning = () => {
   const uid = authHelpers.getCurrentUid();
-  weatherData.getWeatherData(uid)
+  return weatherData.getWeatherData(uid)
     .then((weatherArray) => {
       const isTrueArray = [];
       weatherArray.forEach((weatherDataSet) => {
@@ -95,9 +94,13 @@ const printWeatherWarning = () => {
 };
 
 const weatherPage = () => {
+  let currentLocationArray = '';
   const uid = authHelpers.getCurrentUid();
-  weatherData.getCurrentWeatherData(uid)
-    .then(weatherArray => weatherData.getCurrentWeather(weatherArray.zipcode))
+  return weatherData.getCurrentWeatherData(uid)
+    .then((weatherArray) => {
+      currentLocationArray = weatherArray;
+      return weatherData.getCurrentWeather(currentLocationArray.zipcode);
+    })
     .then((currentWeather) => {
       if (currentWeather.length === 0) {
         printWeatherWarning();
@@ -113,7 +116,7 @@ const weatherPage = () => {
 
 const getLocationsForDropdown = () => {
   const uid = authHelpers.getCurrentUid();
-  weatherData.getWeatherData(uid)
+  return weatherData.getWeatherData(uid)
     .then((weatherArray) => {
       printWeatherDropdown(weatherArray);
     });
