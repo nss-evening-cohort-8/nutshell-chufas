@@ -1,16 +1,18 @@
 import $ from 'jquery';
 import eventsData from '../../helpers/Data/eventData';
 import authHepers from '../../helpers/authHelpers';
-
+import './eventsPage.scss';
 
 const printAllEvents = (eventsArray) => {
   let domString = '';
   domString += '<h5> Events</h5>';
-  domString += '<div class="event-card">';
   domString += '<button class="btn btn-info" id="add-events">Add Events</button>';
   if (eventsArray.length) {
-    eventsArray.forEach((event) => {
-      domString += `<div class="card border-secondary mb-3" style="max-width: 18rem;">
+    eventsArray.forEach((event, i) => {
+      if (i % 4 === 0) {
+        domString += '<div class="row">';
+      }
+      domString += `<div class="card border-secondary mb-3" id="event-card" style="max-width: 18rem;">
                       <div class="card-header">${event.event}</div>
                       <div class="card-body">
                         <p class="card-text">${event.startDate}</p>
@@ -18,9 +20,11 @@ const printAllEvents = (eventsArray) => {
                         <input class="delete-button pt-1" data-delete-id=${event.id} type="image" src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/56-512.png" width="20px"></input>    
                         <input class="edit-button pt-1 ml-2" data-edit-id=${event.id} type="image" src="http://www.iconarchive.com/download/i49407/designcontest/outline/Pencil.ico" width="20px"></input>
                       </div>
-                      <div class="card-footer text-muted" >${event.created}</div>
+                      <div class="card-footer"><small class="text-muted">${event.created}</small></div>
                     </div>`;
-      domString += '</div>';
+      if (i % 4 === 3) {
+        domString += '</div>';
+      }
     });
   } else {
     domString += '<div class="card-text">You have no events.</div>';

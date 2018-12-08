@@ -1,15 +1,16 @@
 import $ from 'jquery';
 import 'bootstrap';
 import authHelpers from '../../../helpers/authHelpers';
+import './articles.scss';
 
 import getAllArticles from '../../../helpers/Data/dataGetter';
 import deleteIcon from '../../images/deleteIcon.jpeg';
 
 const creatCards = (articles) => {
   let domString = '';
-  domString += '<button class="btn-info" id="add-articles-btn">Add Articles</button>';
+  domString += '<button class="btn-info m-3" id="add-articles-btn">Add Articles</button>';
   articles.forEach((article) => {
-    domString += `<div class="card" m-1 style="width: 40rem;">
+    domString += `<div class="card" style="width: 50rem;">
     <div class="card-body">
     <h5 class="card-title">${article.title}</h5>
     <p class="card-text">${article.synopsis}</p>
