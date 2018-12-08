@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 #main-nav {
   position: fixed !important;
   top: 0;
@@ -5,8 +7,35 @@
   width:100%;
 }
  #events-container, #messages {
-   padding-top:55px;
+   padding-top:65px !important;
 }
 #weather-container, #articles-container {
-  padding-top : 70px;
+  padding-top : 70px !important;
+}
+.navbar-brand {
+  font-family: $gochiFont;
+  font-size: 1.5em !important;
+}
+#navbar-button-weather, #navbar-button-events, #navbar-button-articles, #navbar-button-messages, #navbar-button-logout {
+  background-color: rgb(233, 199, 158);
+  margin: 0 10px;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+#navbar-button-weather:hover {
+  background-color: $navBackgroundColor;
+}
+#navbar-button-events:hover {
+  background-color: $navBackgroundColor;
+}
+#navbar-button-articles:hover {
+  background-color: $navBackgroundColor;
+}
+#navbar-button-messages:hover {
+  background-color: $navBackgroundColor;
+} 
+#navbar-button-logout:hover {
+  background-color: $navBackgroundColor;
 }

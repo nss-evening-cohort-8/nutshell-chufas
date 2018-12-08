@@ -6,7 +6,7 @@ import './eventsPage.scss';
 const printAllEvents = (eventsArray) => {
   let domString = '';
   domString += '<h5> Events</h5>';
-  domString += '<button class="btn btn-info" id="add-events">Add Events</button>';
+  domString += '<button class="btn btn-success" id="add-events">+</button>';
   if (eventsArray.length) {
     eventsArray.forEach((event, i) => {
       if (i % 4 === 0) {
