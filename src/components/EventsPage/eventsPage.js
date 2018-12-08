@@ -17,8 +17,12 @@ const printAllEvents = (eventsArray) => {
                       <div class="card-body">
                         <p class="card-text">${event.startDate}</p>
                         <p class="card-text">${event.location}</p>
-                        <input class="delete-button pt-1" data-delete-id=${event.id} type="image" src="https://cdn1.iconfinder.com/data/icons/color-bold-style/21/56-512.png" width="20px"></input>    
-                        <input class="edit-button pt-1 ml-2" data-edit-id=${event.id} type="image" src="http://www.iconarchive.com/download/i49407/designcontest/outline/Pencil.ico" width="20px"></input>
+                        <button type="button" class="event-delete-button pt-1 btn btn-danger btn-sm mb-2" data-delete-id=${event.id}>
+                          <i class="far fa-trash-alt" data-delete-id=${event.id}></i>
+                        </button>
+                        <button type="button" class="edit-button pt-1 btn btn-success btn-sm mb-2" data-edit-id=${event.id}>
+                          <i class="far fa-edit" data-edit-id=${event.id}></i>
+                        </button>                        
                       </div>
                       <div class="card-footer"><small class="text-muted">${event.created}</small></div>
                     </div>`;
@@ -44,7 +48,9 @@ const eventsSection = () => {
 };
 
 const deleteEvent = (e) => {
+  console.log('DELETE');
   const idToDelete = e.target.dataset.deleteId;
+  console.log(idToDelete);
   eventsData.deleteEvent(idToDelete)
     .then(() => {
       eventsSection();
@@ -53,7 +59,7 @@ const deleteEvent = (e) => {
     });
 };
 
-$('body').on('click', '.delete-button', deleteEvent);
+$('body').on('click', '.event-delete-button', deleteEvent);
 
 const initializeEventsSection = () => {
   eventsSection();
