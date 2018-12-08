@@ -18,7 +18,7 @@ const createNewUser = (currentUid) => {
   const uid = currentUid();
   userData.getSingleUser(uid).then((result) => {
     console.log(result.data);
-    const userObject = result.data.valueOf.length;
+    const userObject = Object.keys(result.data).length;
     console.log(userObject);
     if (userObject === 0) {
       const newUserObject = {
@@ -26,7 +26,7 @@ const createNewUser = (currentUid) => {
         currentUsername: authHelpers.getCurrentUserName(),
       };
       console.log(newUserObject);
-      // userData.createSingleUser(newUserObject);
+      userData.createSingleUser(newUserObject);
     }
   });
 };
