@@ -68,6 +68,16 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     });
 });
 
+const getGeoWeather = (lat, lon) => new Promise((resolve, reject) => {
+  axios.get(`https://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=-${lon}}&units=I&key=${weatherbitKey}`)
+    .then((results) => {
+      resolve(results.data.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 const getCity = zipcode => new Promise((resolve, reject) => {
   axios.get(`https://www.zipcodeapi.com/rest/${zipcodeKey}/info.json/${zipcode}/degrees`)
     .then((result) => {
@@ -109,4 +119,5 @@ export default {
   addNewLocation,
   deleteWeatherData,
   getCity,
+  getGeoWeather,
 };

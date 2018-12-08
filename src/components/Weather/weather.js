@@ -1,10 +1,40 @@
 import $ from 'jquery';
+// import apiKeys from '../../../db/apiKeys.json';
 import authHelpers from '../../helpers/authHelpers';
 import weatherData from '../../helpers/Data/weatherData';
 // eslint-disable-next-line import/no-cycle
 import addEditWeather from '../AddEditWeather/addEditWeather';
 
 import './weather.scss';
+
+// const GoogleMapsLoader = require('google-maps');
+
+// GoogleMapsLoader.KEY = apiKeys.googleMapsApiKeys.apiKey;
+// GoogleMapsLoader.VERSION = '3.36';
+// GoogleMapsLoader.LIBRARIES = ['geometry', 'places'];
+
+// GoogleMapsLoader.onLoad(() => {
+//   console.log('I just loaded google maps api');
+// });
+
+// const getGeoZip = () => {
+//   GoogleMapsLoader.load((google) => {
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition((position) => {
+//         const lat = position.coords.latitude;
+//         const long = position.coords.longitude;
+//         const point = new google.maps.LatLng(lat, long);
+//         new google.maps.Geocoder().geocode({ latLng: point }, (res) => {
+//           const zip = res[0].formatted_address.match(/,\s\w{2}\s(\d{5})/);
+//           console.log(zip[1]);
+//           return zip;
+//         });
+//       });
+//     }
+//   });
+// };
+
+// const geoZip = getGeoZip();
 
 const printWeatherDropdown = (weatherArray) => {
   let dropdown = `
@@ -17,6 +47,7 @@ const printWeatherDropdown = (weatherArray) => {
     weatherArray.forEach((location) => {
       dropdown += `<div class="dropdown-item get-location" id=${location.id}>${location.zipcode}</div>`;
     });
+    dropdown += '<div class="dropdown-item get-location" id="geoLocate-btn">WTF Am I?!?!</div>';
   } else {
     $('#weather').html('');
     $('#weather-dropdown').hide();
@@ -105,7 +136,6 @@ const weatherPage = () => {
             printWeatherWarning();
           } else {
             $('#weather-warning').html('');
-            // printWeather(currentWeather);
           }
           weatherData.getCity(currentLocationArray.zipcode)
             .then((currentCity) => {
@@ -118,6 +148,11 @@ const weatherPage = () => {
     });
 };
 
+// const doSomething = (google) => {
+//   console.log(google);
+//   // weatherData.getCurrentWeather(geoZip[1]);
+// };
+
 const getLocationsForDropdown = () => {
   const uid = authHelpers.getCurrentUid();
   return weatherData.getWeatherData(uid)
@@ -126,11 +161,24 @@ const getLocationsForDropdown = () => {
     });
 };
 
+function success(pos) {
+  const crd = pos.coords;
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+}
+
+navigator.geolocation.getCurrentPosition(success);
+
+
 const initWeather = () => {
   getLocationsForDropdown();
   weatherPage();
   printWeatherWarning();
   $('#add-location').hide();
 };
+
+$('body').on('click', '#geoLocate-btn', getGeoWeather);
 
 export default { initWeather };
