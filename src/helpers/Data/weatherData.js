@@ -3,7 +3,6 @@ import apiKeys from '../../../db/apiKeys.json';
 
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
 const weatherbitKey = apiKeys.weatherbitKeys.apiKey;
-const zipcodesKey = apiKeys.zipcodeKeys.apiKey;
 
 const getWeatherData = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
@@ -68,38 +67,6 @@ const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
     });
 });
 
-const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
-  const zip = zipcode;
-  axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
-    .then((results) => {
-      const currentWeatherObject = results.data.data;
-      const currentWeatherArray = [];
-      if (currentWeatherObject !== null) { 
-        Object.keys(currentWeatherObject).forEach((location) => {
-          location.zipcode = zip;
-        })
-      }     
-    })
-})   
-// const getCurrentWeather = zipcode => new Promise((resolve, reject) => {
-//   const zip = zipcode;
-//   axios.get(`https://api.weatherbit.io/v2.0/current?postal_code=${zipcode}&units=I&key=${weatherbitKey}`)
-//     .then((results) => {
-//       const currentWeatherObject = results.data.data;
-//       const currentWeatherArray = [];
-//       if (currentWeatherObject !== null) {
-//         Object.keys(currentWeatherObject).forEach((location) => {
-//           location.zipcode = zip;
-//           currentWeatherArray.push(location);
-//         });
-//         resolve(currentWeatherArray);
-//       }
-//     })
-//     .catch((error) => {
-//       reject(error);
-//     });
-// });
-
 const addNewLocation = weatherObject => axios.post(`${firebaseUrl}/weather.json`, JSON.stringify(weatherObject));
 
 const updateIsCurrent = (locationId, isCurrent) => new Promise((resolve, reject) => {
@@ -122,16 +89,6 @@ const deleteWeatherData = weatherId => new Promise((resolve, reject) => {
     });
 });
 
-const getCity = zipcode => new Promise((resolve, reject) => {
-  axios.get(`https://www.zipcodeapi.com/rest/${zipcodesKey}/info.<format>/${zipcode}/degrees`)
-    .then((result) => {
-      resolve(result);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
-
 export default {
   getWeatherData,
   getCurrentWeatherData,
@@ -140,5 +97,4 @@ export default {
   updateIsCurrent,
   addNewLocation,
   deleteWeatherData,
-  getCity,
 };
