@@ -28,6 +28,7 @@ const showAddFirstWeather = () => {
   </div>
   `;
   $('#add-location').html(domstring).show();
+  $('#add-first-input').focus();
 };
 
 const showAddWeather = () => {
@@ -43,7 +44,7 @@ const showAddWeather = () => {
         <div class="input-group-prepend">
           <div class="input-group-text">Zip Code</div>
         </div>    
-          <input id="add-input" type="text" class="form-control" value="${emptyLocation.zipcode}" id="form-location-zip" placeholder="Enter Zip Code">
+          <input id="add-input" type="text" class="form-control" value="${emptyLocation.zipcode}" placeholder="Enter Zip Code">
       </div>
       <div class="row save-location-btns">
         <button id="save-location" class="btn-success mx-auto">Save New Location</button>
@@ -53,15 +54,9 @@ const showAddWeather = () => {
   </div>
   `;
   $('#add-location').html(domstring).show();
+  $('#add-input').focus();
 };
 
-// const showFirstLocationBtn = () => {
-//   const domstring = `
-//         <div class="row add-location-btns">
-//           <button id="add-first-location" class="btn-success mx-auto">Save New Location</button>
-//         </div>`;
-//   $('#first-location-btn').html(domstring).show();
-// };
 
 const getFirstLocationFromForm = () => {
   const uid = authHelpers.getCurrentUid();
@@ -94,27 +89,6 @@ const updateCurrentLocation = (locationId) => {
     });
 };
 
-// const updateAllIsCurrent = (e) => {
-//   const locationId = e.target.id;
-//   const uid = authHelpers.getCurrentUid();
-//   weatherData.getWeatherData(uid)
-//     .then((weatherArray) => {
-//       weatherArray.forEach((location) => {
-//         let current = location.isCurrent;
-//         if (current === true) {
-//           current = false;
-//         }
-//         weatherData.updateIsCurrent(location.id, current)
-//           .then(() => {
-//             updateCurrentLocation(locationId);
-//           })
-//           .catch((error) => {
-//             console.error('error updating all to false', error);
-//           });
-//       });
-//     });
-// };
-
 const updateAllIsCurrent = (e) => {
   const locationId = e.target.id;
   const uid = authHelpers.getCurrentUid();
@@ -138,12 +112,10 @@ const updateAllIsCurrent = (e) => {
 
 const addFirstLocation = () => {
   const firstLocation = getFirstLocationFromForm();
-  console.log(firstLocation);
   return weatherData.addNewLocation(firstLocation)
     .then(() => {
       weather.initWeather();
       $('#add-location').html('').hide();
-      $('#first-location-btn').hide();
       $('#weather-dropdown').show();
     })
     .catch((error) => {
@@ -193,7 +165,7 @@ const bindEvents = () => {
   $('body').on('click', '#save-location', addLocation);
   $('body').on('click', '#cancel-add-location', weather.initWeather);
   $('body').on('click', '#add-first-location', addFirstLocation);
-  $('body').on('keyup', '#add-location', (e) => {
+  $('body').on('keyup', '#add-input', (e) => {
     if (e.keyCode === 13) {
       addLocation();
     }
