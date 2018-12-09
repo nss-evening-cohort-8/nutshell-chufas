@@ -1,11 +1,14 @@
 @import "../../../styles/variables";
 
 #articles-container {
-  // border: 2px solid white;
   padding :15px;
   margin: 10px 20px;
-  // background-color: $backgroundColor;
 }
 .card {
   margin: 0 auto;
+}
+.heading-article {
+  padding-top:10px;
+  font-family: $articleHeading;
+  font-size: 2em;
 }

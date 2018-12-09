@@ -16,26 +16,10 @@
   font-family: $gochiFont;
   font-size: 1.5em !important;
 }
-#navbar-button-weather, #navbar-button-events, #navbar-button-articles, #navbar-button-messages, #navbar-button-logout {
-  background-color: rgb(233, 199, 158);
-  margin: 0 10px;
-  color: black;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-#navbar-button-weather:hover {
-  background-color: $navBackgroundColor;
-}
-#navbar-button-events:hover {
-  background-color: $navBackgroundColor;
-}
-#navbar-button-articles:hover {
-  background-color: $navBackgroundColor;
-}
-#navbar-button-messages:hover {
-  background-color: $navBackgroundColor;
-} 
-#navbar-button-logout:hover {
-  background-color: $navBackgroundColor;
-}
+// #navbar-button-weather, #navbar-button-events, #navbar-button-articles, #navbar-button-messages, #navbar-button-logout {
+//   background-color: rgb(233, 199, 158);
+//   margin: 0 10px;
+//   color: black;
+//   padding: 5px 10px;
+//   border-radius: 5px;
+// }

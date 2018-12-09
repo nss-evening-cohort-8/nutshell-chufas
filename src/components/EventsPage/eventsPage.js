@@ -5,8 +5,10 @@ import './eventsPage.scss';
 
 const printAllEvents = (eventsArray) => {
   let domString = '';
+  domString += '<div class="d-flex flex-row justify-content-center p-1">';
   domString += '<h5 class="heading"> Events</h5>';
-  domString += '<button class="btn btn-success" id="add-events">+</button>';
+  domString += '<button class="btn btn-success ml-3" id="add-events">+</button>';
+  domString += '</div>';
   if (eventsArray.length) {
     eventsArray.forEach((event, i) => {
       if (i % 4 === 0) {
