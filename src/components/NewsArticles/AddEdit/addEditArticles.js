@@ -4,20 +4,21 @@ import authHelpers from '../../../helpers/authHelpers';
 import initializeArticlesPage from '../GetArticles/articles';
 
 import getArticles from '../../../helpers/Data/dataGetter';
+import './addEditArticles.scss';
 
 const formBuilder = (articles) => {
   const form = `<form>
     <div class="form-group">
       <label for="input-title">Article Title</label>
-      <input type="text" class="form-control" value="${articles.title}" id="input-title">
+      <input type="text" class="form-control" value="${articles.title}" id="input-title" required>
     </div>
     <div class="form-group">
       <label for="inpute-synopsis">Synopsis</label>
-      <input type="text" class="form-control" value="${articles.synopsis}" id="input-synopsis">
+      <input type="text" class="form-control" value="${articles.synopsis}" id="input-synopsis" required>
     </div>
     <div class="form-group">
       <label for="inpute-url">URL</label>
-      <input type="url" name="url" class="form-control" value="${articles.url}" id="input-url">
+      <input type="url" name="url" class="form-control" value="${articles.url}" id="input-url" required>
     </div>
   </form>`;
   return form;
