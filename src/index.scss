@@ -3,5 +3,11 @@
 @import './styles/variables';
 
 body {
-  background-color: $darkgray;
+  background-image: $backgroundImage;
+  background-attachment: fixed;
+}
+.weather-event-wrapper {
+  display: flex;
+  justify-content:space-around;
+  flex-direction: row;
 }
