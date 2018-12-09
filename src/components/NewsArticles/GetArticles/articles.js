@@ -1,21 +1,27 @@
 import $ from 'jquery';
 import 'bootstrap';
 import authHelpers from '../../../helpers/authHelpers';
-
+import './articles.scss';
 import getAllArticles from '../../../helpers/Data/dataGetter';
-import deleteIcon from '../../images/deleteIcon.jpeg';
 
 const creatCards = (articles) => {
   let domString = '';
-  domString += '<button class="btn-info" id="add-articles-btn">Add Articles</button>';
+  domString += '<div class="d-flex flex-row justify-content-center">';
+  domString += '<h5 class="heading-article"> Articles</h5>';
+  domString += '<button class=" btn btn-success m-3" id="add-articles-btn">+</button>';
+  domString += '</div>';
   articles.forEach((article) => {
-    domString += `<div class="card" m-1 style="width: 40rem;">
+    domString += `<div class="card" style="width: 50rem;">
     <div class="card-body">
     <h5 class="card-title">${article.title}</h5>
     <p class="card-text">${article.synopsis}</p>
-    <a href="${article.url}" target="_blank">Read more</a>
-    <img src="${deleteIcon}" width="20px" height="20px" class="btn-danger delete-btn" data-delete-id=${article.id}>
-    <button class="btn-info edit-btn" data-edit-id=${article.id}>Edit</button>
+    <a href="${article.url}" target="_blank" class="mr-3">Read more</a>
+    <button type="button" class="delete-btn pt-1 btn btn-danger btn-sm mb-2" data-delete-id=${article.id}>
+      <i class="far fa-trash-alt" data-delete-id=${article.id}></i>
+    </button>
+    <button type="button" class="edit-btn pt-1 btn btn-success btn-sm mb-2" data-edit-id=${article.id}>
+      <i class="far fa-edit" data-edit-id=${article.id}></i>
+    </button>  
     </div>
     </div>`;
   });
