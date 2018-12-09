@@ -26,7 +26,6 @@ const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
   auth.loginBtn();
-  weather.getGeoZip();
   authHelpers.checkLoginStatus(initializeUserView);
   $('body').on('click', '#add-articles-btn', buildArticleForm.buildAddForm);
   $('body').on('click', '#add-events', showAddForm);
