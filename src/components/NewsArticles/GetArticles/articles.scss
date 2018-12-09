@@ -1,7 +1,14 @@
-@import "~bootstrap/scss/bootstrap";
+@import "../../../styles/variables";
 
-div#articles {
-    width: 600px;
-    height: 550px;
-    overflow: scroll;
+#articles-container {
+  padding :15px;
+  margin: 10px 20px;
+}
+.card {
+  margin: 0 auto;
+}
+.heading-article {
+  padding-top:10px;
+  font-family: $articleHeading;
+  font-size: 2em;
 }

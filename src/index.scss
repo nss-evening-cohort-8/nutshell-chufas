@@ -3,8 +3,11 @@
 @import './styles/variables';
 
 body {
-  background-color: #330000;
+  background-image: $backgroundImage;
+  background-attachment: fixed;
 }
-#navbar {
-  background-color: #990000;
+.weather-event-wrapper {
+  display: flex;
+  justify-content:space-around;
+  flex-direction: row;
 }
