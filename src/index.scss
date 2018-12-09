@@ -3,6 +3,11 @@
 @import './styles/variables';
 
 body {
-  background-image: url(http://sportmiteva98.info/wp-content/uploads/2018/08/light-brown-background-wonderful-light-brown-background-wallpapers-full-quality-for-desktop-light-brown-background-pattern.jpg);
+  background-image: $backgroundImage;
   background-attachment: fixed;
+}
+.weather-event-wrapper {
+  display: flex;
+  justify-content:space-around;
+  flex-direction: row;
 }

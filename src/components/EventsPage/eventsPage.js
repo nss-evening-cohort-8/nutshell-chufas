@@ -1,17 +1,21 @@
 import $ from 'jquery';
 import eventsData from '../../helpers/Data/eventData';
 import authHepers from '../../helpers/authHelpers';
-
+import './eventsPage.scss';
 
 const printAllEvents = (eventsArray) => {
   let domString = '';
-  domString += '<h5> Events</h5>';
-  domString += '<div class="event-card">';
-  domString += '<button class="btn btn-info" id="add-events">Add Events</button>';
+  domString += '<div class="d-flex flex-row justify-content-center p-1">';
+  domString += '<h5 class="heading"> Events</h5>';
+  domString += '<button class="btn btn-success ml-3" id="add-events">+</button>';
+  domString += '</div>';
   if (eventsArray.length) {
-    eventsArray.forEach((event) => {
-      domString += `<div class="card border-secondary mb-3" style="max-width: 18rem;">
-                      <div class="card-header">${event.event}</div>
+    eventsArray.forEach((event, i) => {
+      if (i % 4 === 0) {
+        domString += '<div class="row">';
+      }
+      domString += `<div class="card border-secondary mb-3" id="event-card" style="max-width: 18rem;">
+                      <h5 class="card-header">${event.event}</h5>
                       <div class="card-body">
                         <p class="card-text">${event.startDate}</p>
                         <p class="card-text">${event.location}</p>
@@ -22,9 +26,11 @@ const printAllEvents = (eventsArray) => {
                           <i class="far fa-edit" data-edit-id=${event.id}></i>
                         </button>                        
                       </div>
-                      <div class="card-footer text-muted" >${event.created}</div>
+                      <div class="card-footer"><small class="text-muted">${event.created}</small></div>
                     </div>`;
-      domString += '</div>';
+      if (i % 4 === 3) {
+        domString += '</div>';
+      }
     });
   } else {
     domString += '<div class="card-text">You have no events.</div>';
