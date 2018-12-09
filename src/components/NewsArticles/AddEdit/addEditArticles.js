@@ -10,15 +10,15 @@ const formBuilder = (articles) => {
   const form = `<form>
     <div class="form-group">
       <label for="input-title">Article Title</label>
-      <input type="text" class="form-control" value="${articles.title}" id="input-title" required>
+      <input type="text" class="form-control articles-control" value="${articles.title}" id="input-title" required>
     </div>
     <div class="form-group">
       <label for="inpute-synopsis">Synopsis</label>
-      <input type="text" class="form-control" value="${articles.synopsis}" id="input-synopsis" required>
+      <input type="text" class="form-control articles-control" value="${articles.synopsis}" id="input-synopsis" required>
     </div>
     <div class="form-group">
       <label for="inpute-url">URL</label>
-      <input type="url" name="url" class="form-control" value="${articles.url}" id="input-url" required>
+      <input type="url" name="url" class="form-control articles-control" value="${articles.url}" id="input-url" required>
     </div>
   </form>`;
   return form;
@@ -52,15 +52,20 @@ const buildAddForm = () => { // we need this function just to reuse fomBuilder
 
 const addNewArticle = () => {
   const newArticle = getArticlesFromForm();
-  getArticles.addNewArticle(newArticle)
-    .then(() => {
-      $('#add-articles').hide();
-      $('#articles').show();
-      initializeArticlesPage();
-    })
-    .catch((error) => {
-      console.error('error', error);
-    });
+  console.log($('#input-title').val());
+  if ($('#input-title').val() === '' || $('#input-synopsis').val() === '' || $('#input-url').val() === '') {
+    $('.articles-control').addClass('is-invalid');
+  } else {
+    getArticles.addNewArticle(newArticle)
+      .then(() => {
+        $('#add-articles').hide();
+        $('#articles').show();
+        initializeArticlesPage();
+      })
+      .catch((error) => {
+        console.error('error', error);
+      });
+  }
 };
 
 const showEditForm = (e) => {
