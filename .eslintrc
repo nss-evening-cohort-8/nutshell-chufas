@@ -8,7 +8,10 @@
     "document": true,
     "window": true,
     "$": true,
-    "allowTemplateLiterals": true
+    "allowTemplateLiterals": true,
+    "navigator": true,
+    "google": true,
+    "GoogleMapsLoader": true
   },
   "rules": {
     "no-console": [
