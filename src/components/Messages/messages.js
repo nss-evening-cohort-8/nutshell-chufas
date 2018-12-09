@@ -47,7 +47,8 @@ const printAllMessages = (messagesArray, usersArray) => {
             <i class="far fa-edit"></i>
           </button>
           <button type="button" class="msg-delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
-            <i class="far fa-trash-alt"></i></button>
+            <i class="far fa-trash-alt"></i>
+          </button>
         </div>`;
     }
     domString += `
@@ -99,7 +100,7 @@ const addNewMessage = (e) => {
 };
 
 const deleteMessage = (e) => {
-  const deleteMessageId = $(e.target).closest('.delete-btn').data('delete-btn-id');
+  const deleteMessageId = $(e.target).closest('.msg-delete-btn').data('delete-btn-id');
   messageData.deleteMessage(deleteMessageId).then(() => {
     getAllMessages();
   })
