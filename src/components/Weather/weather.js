@@ -17,6 +17,7 @@ const printWeatherDropdown = (weatherArray) => {
     weatherArray.forEach((location) => {
       dropdown += `<div class="dropdown-item get-location" id=${location.id}>${location.zipcode}</div>`;
     });
+    dropdown += '<div class="dropdown-item" id="geoLocate-btn">WTF Am I?!?!</div>';
   } else {
     $('#weather').html('');
     $('#weather-dropdown').hide();
@@ -43,6 +44,7 @@ const printWeatherDropdown = (weatherArray) => {
 };
 
 const printWeather = (currentWeather, currentCity) => {
+  $('#geo-weather').hide();
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
@@ -63,7 +65,28 @@ const printWeather = (currentWeather, currentCity) => {
       </div>
     </div>
   `;
-  $('#weather').html(domstring);
+  $('#weather').html(domstring).show();
+};
+
+const printGeoWeather = (currentWeather) => {
+  $('#weather').hide();
+  $('#geo-weather').show();
+  const domstring = `
+    <div class="row weather-card ">
+      <div class="card col-6 mx-auto">
+      <div class="card-header">Current Conditions</div>
+      <div class="card-img-div">
+        <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+      </div>  
+        <div class="card-body">
+          <h5 class="card-title">${currentWeather[0].city_name}, ${currentWeather[0].state_code}</h5>
+          <p class="card-text">${currentWeather[0].temp}&degF</p>
+          <p class="card-text">${currentWeather[0].weather.description}</p>
+        </div>
+      </div>
+    </div>
+  `;
+  $('#geo-weather').html(domstring);
 };
 
 const printWeatherWarning = () => {
@@ -77,6 +100,7 @@ const printWeatherWarning = () => {
         }
         if (isTrueArray.length === 0) {
           $('#weather').html('');
+          $('#geo-weather').hide();
           const domstring = `
           <div class="row">
             <div class="card col-8 mx-auto">
@@ -105,7 +129,6 @@ const weatherPage = () => {
             printWeatherWarning();
           } else {
             $('#weather-warning').html('');
-            // printWeather(currentWeather);
           }
           weatherData.getCity(currentLocationArray.zipcode)
             .then((currentCity) => {
@@ -118,6 +141,18 @@ const weatherPage = () => {
     });
 };
 
+const geoWeatherPage = (position) => {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  weatherData.getGeoWeather(lat, lon)
+    .then((currentWeather) => {
+      printGeoWeather(currentWeather);
+    })
+    .catch((error) => {
+      console.error('error in getting geoLocatedWeather', error);
+    });
+};
+
 const getLocationsForDropdown = () => {
   const uid = authHelpers.getCurrentUid();
   return weatherData.getWeatherData(uid)
@@ -126,11 +161,21 @@ const getLocationsForDropdown = () => {
     });
 };
 
+const showGeoWeather = () => {
+  $('#weather').hide();
+  $('#geo-weather').show();
+  $('#weather-warning').html('');
+};
+
+navigator.geolocation.getCurrentPosition(geoWeatherPage);
+
 const initWeather = () => {
   getLocationsForDropdown();
   weatherPage();
   printWeatherWarning();
   $('#add-location').hide();
 };
+
+$('body').on('click', '#geoLocate-btn', showGeoWeather);
 
 export default { initWeather };
