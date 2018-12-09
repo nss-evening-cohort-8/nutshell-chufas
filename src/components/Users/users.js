@@ -15,4 +15,5 @@ const createNewUser = (currentUid) => {
   });
 };
 
+
 export default { createNewUser };
