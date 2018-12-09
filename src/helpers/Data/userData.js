@@ -14,7 +14,6 @@ const getAllUsers = () => new Promise((resolve, reject) => {
           usersArray.push(usersObject[userId]);
         });
       }
-      console.log(usersArray);
       resolve(usersArray);
     })
     .catch((err) => {

@@ -8,7 +8,7 @@ const createNewUser = (currentUid) => {
     if (userObject === 0) {
       const newUserObject = {
         userUid: uid,
-        currentUsername: authHelpers.getCurrentUserName(),
+        userName: authHelpers.getCurrentUserName(),
       };
       userData.createSingleUser(newUserObject);
     }

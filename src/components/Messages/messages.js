@@ -1,9 +1,9 @@
-/* eslint-disable no-else-return */
 /* eslint-disable max-len */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import messageData from '../../helpers/Data/messageData';
 import messageHelpers from '../../helpers/messageHelpers';
+import userData from '../../helpers/Data/userData';
 import './messages.scss';
 
 const displayMsgInput = () => {
@@ -13,61 +13,60 @@ const displayMsgInput = () => {
   $('#message-board-input').html(domString);
 };
 
-const printAllMessages = (messagesArray) => {
+const printAllMessages = (messagesArray, usersArray) => {
   const currentUid = authHelpers.getCurrentUid();
   let domString = '';
+  let username = '';
   if (messagesArray.length > 20) {
     messagesArray.shift(messagesArray.length - 20, messagesArray.length);
   }
   messagesArray.forEach((message) => {
+    for (let i = 0; i < usersArray.length; i += 1) {
+      if (usersArray[i].userUid === message.userUid) {
+        username = usersArray[i].userName;
+        break;
+      } else if (usersArray[i].userUid !== message.userUid) {
+        username = message.userUid;
+      }
+    }
+    domString += `
+      <div class="msg-row row m-1" id="${message.id}">
+        <div class="col-md-3">
+          <p class="text-left msg-row-user"><strong>${username}</strong></p>
+        </div>
+        <div class="col-md-2">
+          <p class="text-left"><small>${message.isEdited === true ? `${messageHelpers.convertTimestamp(message.timestamp)} (edited)` : `${messageHelpers.convertTimestamp(message.timestamp)}`}</small></p>
+        </div>
+        <div class="col-md-6">
+          <p class="text-left msg-row-message">${message.message}</p>
+        </div>`;
     if (message.userUid === currentUid) {
       domString += `
-      <div class="msg-row row m-1" id="${message.id}">
-        <div class="col-md-3">
-          <p class="text-left msg-row-user"><strong>${message.userUid}</strong></p>
-        </div>
-        <div class="col-md-2 p-0">
-          <p class="text-center"><small>${messageHelpers.convertTimestamp(message.timestamp)}</small></p>
-        </div>
-        <div class="col-md-6">
-          <p class="text-left msg-row-message">${message.isEdited === true ? `${message.message} <small>(edited)</small>` : message.message}</p>
-        </div>
         <div class="col-md-1 d-flex justify-content-center align-items-center p-0">
-          <button type="button" class="edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id} data-is-edited=${message.isEdited} data-original-timestamp=${message.timestamp}>
+          <button type="button" class="msg-edit-btn msg-btn btn btn-success btn-sm" data-edit-btn-id=${message.id} data-is-edited=${message.isEdited} data-original-timestamp=${message.timestamp}>
             <i class="far fa-edit"></i>
           </button>
-          <button type="button" class="delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
+          <button type="button" class="msg-delete-btn msg-btn btn btn-danger btn-sm" data-delete-btn-id=${message.id}>
             <i class="far fa-trash-alt"></i></button>
-        </div>
-      </div>
-      <hr>`;
-    } else {
-      domString += `
-      <div class="msg-row row m-1" id="${message.id}">
-        <div class="col-md-3">
-          <p class="text-left msg-row-user"><strong>${message.userUid}</strong></p>
-        </div>
-        <div class="col-md-2 p-0">
-          <p class="text-center"><small>${messageHelpers.convertTimestamp(message.timestamp)}</small></p>
-        </div>
-        <div class="col-md-6">
-          <p class="text-left">${message.isEdited === true ? `${message.message} <small>(edited)</small>` : message.message}</p>
-        </div>
-      </div>
-      <hr>`;
+        </div>`;
     }
+    domString += `
+      </div>
+      <hr>`;
   });
   $('#message-board-output').html(domString);
 };
 
 const getAllMessages = () => {
-  messageData.getAllMessages().then((messagesArray) => {
-    messagesArray.sort((first, second) => first.timestamp - second.timestamp);
-    printAllMessages(messagesArray);
-  })
-    .catch((err) => {
-      console.error(err);
-    });
+  userData.getAllUsers().then((usersArray) => {
+    messageData.getAllMessages().then((messagesArray) => {
+      messagesArray.sort((first, second) => first.timestamp - second.timestamp);
+      printAllMessages(messagesArray, usersArray);
+    })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 };
 
 const getObjectFromInput = () => {
@@ -112,14 +111,12 @@ const deleteMessage = (e) => {
 const changeMessageToInput = (e) => {
   const editedMessageElement = $(e.target).parents().closest('.msg-row').find('.msg-row-message');
   const editedMessage = $(editedMessageElement[0]).html();
-  const editMessageId = $(e.target).closest('.edit-btn').data('edit-btn-id');
-  const isEdited = $(e.target).closest('.edit-btn').data('is-edited');
-  const originalTimestamp = $(e.target).closest('.edit-btn').data('original-timestamp');
+  const editMessageId = $(e.target).closest('.msg-edit-btn').data('edit-btn-id');
+  const isEdited = $(e.target).closest('.msg-edit-btn').data('is-edited');
+  const originalTimestamp = $(e.target).closest('.msg-edit-btn').data('original-timestamp');
   if (isEdited === true) {
-    const editedString = editedMessage.split(' ');
-    editedString.splice(-1, 1);
-    // console.log(removedEditedText);
-    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedString}" data-edit-input-id=${editMessageId} data-orig-timestamp=${originalTimestamp} class="form-control edit-input">`);
+    // keeps original timestamp
+    $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} data-orig-timestamp=${originalTimestamp} class="form-control edit-input">`);
   } else {
     $(editedMessageElement[0]).replaceWith(`<input type="text" value="${editedMessage}" data-edit-input-id=${editMessageId} class="form-control edit-input">`);
   }
@@ -147,8 +144,8 @@ const initMessagesPage = () => {
 
 $('body').on('keyup', '#msg-input', addNewMessage);
 $('body').on('click', '#msg-input-btn', addNewMessage);
-$('body').on('click', '.delete-btn', deleteMessage);
-$('body').on('click', '.edit-btn', changeMessageToInput);
+$('body').on('click', '.msg-delete-btn', deleteMessage);
+$('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
 
 export default initMessagesPage;
