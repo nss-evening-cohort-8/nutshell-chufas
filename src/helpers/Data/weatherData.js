@@ -38,7 +38,6 @@ const getCurrentWeatherData = uid => new Promise((resolve, reject) => {
       }
       weatherArray.forEach((weatherData) => {
         if (weatherData.isCurrent === true) {
-          console.log(weatherData);
           resolve(weatherData);
         }
       });
