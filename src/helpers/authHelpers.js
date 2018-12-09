@@ -21,8 +21,8 @@ const checkLoginStatus = (initializeUserView, getUserName) => {
       $('#add-articles').hide();
       $('#weather-container').show();
       $('#events').show();
-      initializeUserView();
       getUserName(getCurrentUid);
+      initializeUserView();
     } else {
     //  $('#navbar-button-auth').show();
       $('#navbar-button-logout').hide();
