@@ -17,6 +17,7 @@ const printWeatherDropdown = (weatherArray) => {
     weatherArray.forEach((location) => {
       dropdown += `<div class="dropdown-item get-location" id=${location.id}>${location.zipcode}</div>`;
     });
+    dropdown += '<div class="dropdown-item" id="geoLocate-btn">WTF Am I?!?!</div>';
   } else {
     $('#weather').html('');
     $('#weather-dropdown').hide();
@@ -42,7 +43,34 @@ const printWeatherDropdown = (weatherArray) => {
   $('#weather-dropdown').html(dropdown);
 };
 
-const printWeather = (currentWeather, currentId) => {
+const printWeather = (currentWeather, currentCity) => {
+  $('#geo-weather').hide();
+  const domstring = `
+    <div class="row weather-card ">
+      <div class="card col-6 mx-auto">
+      <div class="card-header">Current Conditions</div>
+      <div class="card-img-div">
+        <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
+      </div>  
+        <div class="card-body">
+          <h5 class="card-title">${currentCity.city}, ${currentCity.state}</h5>
+          <p class="card-text">${currentWeather[0].temp}&degF</p>
+          <p class="card-text">${currentWeather[0].weather.description}</p>
+        </div>
+        <div class="col-md-1 d-flex justify-content-center">
+          <button type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  $('#weather').html(domstring).show();
+};
+
+const printGeoWeather = (currentWeather) => {
+  $('#weather').hide();
+  $('#geo-weather').show();
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
@@ -55,15 +83,10 @@ const printWeather = (currentWeather, currentId) => {
           <p class="card-text">${currentWeather[0].temp}&degF</p>
           <p class="card-text">${currentWeather[0].weather.description}</p>
         </div>
-        <div class="col-md-1 d-flex justify-content-center">
-          <button id="${currentId}" type="button" class="delete-weather-btn btn btn-danger btn-sm mb-2">
-            <i class="far fa-trash-alt"></i>
-          </button>
-        </div>
       </div>
     </div>
   `;
-  $('#weather').html(domstring);
+  $('#geo-weather').html(domstring);
 };
 
 const printWeatherWarning = () => {
@@ -77,6 +100,7 @@ const printWeatherWarning = () => {
         }
         if (isTrueArray.length === 0) {
           $('#weather').html('');
+          $('#geo-weather').hide();
           const domstring = `
           <div class="row">
             <div class="card col-8 mx-auto">
@@ -99,18 +123,33 @@ const weatherPage = () => {
   return weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
       currentLocationArray = weatherArray;
-      return weatherData.getCurrentWeather(currentLocationArray.zipcode);
-    })
-    .then((currentWeather) => {
-      if (currentWeather.length === 0) {
-        printWeatherWarning();
-      } else {
-        $('#weather-warning').html('');
-        printWeather(currentWeather);
-      }
+      weatherData.getCurrentWeather(currentLocationArray.zipcode)
+        .then((currentWeather) => {
+          if (currentWeather.length === 0) {
+            printWeatherWarning();
+          } else {
+            $('#weather-warning').html('');
+          }
+          weatherData.getCity(currentLocationArray.zipcode)
+            .then((currentCity) => {
+              printWeather(currentWeather, currentCity);
+            });
+        });
     })
     .catch((error) => {
       console.error('error in getting weather', error);
+    });
+};
+
+const geoWeatherPage = (position) => {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  weatherData.getGeoWeather(lat, lon)
+    .then((currentWeather) => {
+      printGeoWeather(currentWeather);
+    })
+    .catch((error) => {
+      console.error('error in getting geoLocatedWeather', error);
     });
 };
 
@@ -122,11 +161,21 @@ const getLocationsForDropdown = () => {
     });
 };
 
+const showGeoWeather = () => {
+  $('#weather').hide();
+  $('#geo-weather').show();
+  $('#weather-warning').html('');
+};
+
+navigator.geolocation.getCurrentPosition(geoWeatherPage);
+
 const initWeather = () => {
   getLocationsForDropdown();
   weatherPage();
   printWeatherWarning();
   $('#add-location').hide();
 };
+
+$('body').on('click', '#geoLocate-btn', showGeoWeather);
 
 export default { initWeather };
