@@ -100,6 +100,7 @@ const printWeatherWarning = () => {
         }
         if (isTrueArray.length === 0) {
           $('#weather').html('');
+          $('#geo-weather').hide();
           const domstring = `
           <div class="row">
             <div class="card col-8 mx-auto">
@@ -163,7 +164,7 @@ const getLocationsForDropdown = () => {
 const showGeoWeather = () => {
   $('#weather').hide();
   $('#geo-weather').show();
-  $('#weaather-warning').html('');
+  $('#weather-warning').html('');
 };
 
 navigator.geolocation.getCurrentPosition(geoWeatherPage);
