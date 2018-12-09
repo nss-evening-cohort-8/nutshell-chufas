@@ -1,7 +1,23 @@
+<<<<<<< HEAD
 @import "~bootstrap/scss/bootstrap";
 
 div#articles {
     width: 600px;
     height: 550px;
     overflow: scroll;
+=======
+@import "../../../styles/variables";
+
+#articles-container {
+  padding :15px;
+  margin: 10px 20px;
+}
+.card {
+  margin: 0 auto;
+}
+.heading-article {
+  padding-top:10px;
+  font-family: $articleHeading;
+  font-size: 2em;
+>>>>>>> 84cda21085a1e9e582b67c4ad796261396110607
 }
