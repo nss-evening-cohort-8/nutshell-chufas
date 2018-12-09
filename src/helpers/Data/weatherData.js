@@ -23,19 +23,6 @@ const getWeatherData = uid => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleLocation = locationId => new Promise((resolve, reject) => {
-  axios.get(`${firebaseUrl}/weather/${locationId}.json`)
-    .then((result) => {
-      const singleLocation = result.data;
-      singleLocation.id = singleLocation;
-      resolve(singleLocation);
-      console.log(singleLocation);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
-
 const getCurrentWeatherData = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
     .then((results) => {
@@ -113,7 +100,6 @@ const deleteWeatherData = weatherId => new Promise((resolve, reject) => {
 export default {
   getWeatherData,
   getCurrentWeatherData,
-  getSingleLocation,
   getCurrentWeather,
   updateIsCurrent,
   addNewLocation,
