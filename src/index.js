@@ -17,7 +17,7 @@ import users from './components/Users/users';
 
 const initializeUserView = () => {
   weather.initWeather();
-  messages();
+  messages.initMessagesPage();
   getArticles();
   addEditWeather.bindEvents();
   initializeEventsSection();
@@ -32,4 +32,7 @@ const initApp = () => {
   $('body').on('click', '#add-events', showAddForm);
 };
 
+const timeout = () => setInterval(messages.reloadMessages, 5000);
+
+timeout();
 initApp();

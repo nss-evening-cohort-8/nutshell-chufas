@@ -149,4 +149,9 @@ $('body').on('click', '.msg-delete-btn', deleteMessage);
 $('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
 
-export default initMessagesPage;
+const reloadMessages = () => {
+  $('#message-board').load();
+  console.log('reload');
+};
+
+export default { initMessagesPage, getAllMessages, reloadMessages };
