@@ -125,10 +125,15 @@ const addFirstLocation = () => {
 
 const addLocation = () => {
   const uid = authHelpers.getCurrentUid();
-  return weatherData.getCurrentWeatherData(uid)
+  return weatherData.getWeatherData(uid)
     .then((weatherArray) => {
-      const current = false;
-      weatherData.updateIsCurrent(weatherArray.id, current);
+      weatherArray.forEach((location) => {
+        let current = location.isCurrent;
+        if (current === true) {
+          current = false;
+        }
+        weatherData.updateIsCurrent(location.id, current);
+      });
       const newLocation = getLocationFromForm();
       return newLocation;
     })
@@ -172,7 +177,6 @@ const bindEvents = () => {
   });
   $('body').on('keyup', '#add-first-input', (e) => {
     if (e.keyCode === 13) {
-      console.log('first loc enter!');
       addFirstLocation();
     }
   });
