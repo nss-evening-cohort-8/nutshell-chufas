@@ -30,17 +30,17 @@ const navbarEvents = () => {
 const createNavbar = () => {
   const domString = `
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main-nav">
-  <a class="navbar-brand text-light">Chufas</a>
+  <a class="navbar-brand text-light" style="font-size: 30px">Chufas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a id="navbar-button-weather" href="#weather-container" class="nav-link">Weather</a>
+        <a id="navbar-button-weather" href="#weather-event" class="nav-link">Weather</a>
       </li> 
       <li class="nav-item">
-        <a id="navbar-button-events" href="#events-container" class="nav-link">Events</a>
+        <a id="navbar-button-events" href="#weather-event" class="nav-link">Events</a>
       </li> 
       <li class="nav-item">
         <a id="navbar-button-articles" href="#articles-container" class="nav-link">Articles</a>

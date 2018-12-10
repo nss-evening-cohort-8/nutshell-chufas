@@ -10,5 +10,8 @@
 
   "weatherbitKeys" : {
     "apiKey" : ""
+  },
+  "zipcodeKeys" : {
+    "apiKey" : ""
   }
 }

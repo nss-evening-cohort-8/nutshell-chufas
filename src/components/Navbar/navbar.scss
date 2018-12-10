@@ -1,25 +1,22 @@
-@import "../../styles/variables";
-
 #main-nav {
   position: fixed !important;
   top: 0;
   z-index: 1;
   width:100%;
+  background-color: #663333;
 }
- #events-container {
-   padding-top:65px !important;
+.navbar-nav > li > a {
+  color: #000;
+  a {
+    text-decoration: none;
+  }
+}
+#events-container {
+  padding-top:65px !important;
 }
 #weather-container, #articles-container, #messages-container {
   padding-top : 70px !important;
 }
 .navbar-brand {
-  font-family: $gochiFont;
-  font-size: 1.5em !important;
+  font-family: 'Gochi Hand', cursive;
 }
-// #navbar-button-weather, #navbar-button-events, #navbar-button-articles, #navbar-button-messages, #navbar-button-logout {
-//   background-color: rgb(233, 199, 158);
-//   margin: 0 10px;
-//   color: black;
-//   padding: 5px 10px;
-//   border-radius: 5px;
-// }

@@ -1,0 +1,9 @@
+@import "~bootstrap/scss/bootstrap";
+
+.add-article:invalid {
+    border: 2px solid red;
+  }
+  
+.add-article:valid {
+    border: 2px solid black;
+  }
