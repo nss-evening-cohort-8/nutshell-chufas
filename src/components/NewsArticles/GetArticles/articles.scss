@@ -18,3 +18,18 @@
 #articles, #add-articles {
   margin-top: 5%;
 }
+
+#articles-form {
+  display: flex;
+  justify-content: center;
+}
+
+#add-articles {
+  width: 75%;
+  padding: 1rem;
+  background-color: white;
+  .articles-control {
+    display: flex;
+    justify-content: center;
+  }
+}

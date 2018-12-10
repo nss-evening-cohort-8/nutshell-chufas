@@ -1,12 +1,25 @@
+@import "../../styles/variables";
+
+#messages-container{
+  margin-top: 5%;
+  padding: 15px;
+}
+
+.msg-title {
+  font-family: $articleHeading;
+  font-size: 2em;
+  margin-bottom: 1rem;
+}
+
 #messages {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: 1rem 0rem 6rem 0rem;
+  margin: 0rem 0rem 6rem 0rem;
+  padding-top: 0px;
   #message-board {
-    padding: 8px;
     width: 85%;
-    margin-top: 5%;
+    padding: 10px;
     #message-board-input {
       display: flex;
       flex-direction: row;

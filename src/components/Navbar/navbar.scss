@@ -3,19 +3,13 @@
   top: 0;
   z-index: 1;
   width:100%;
-  background-color: #663333;
 }
-.navbar-nav > li > a {
-  color: #000;
-  a {
-    text-decoration: none;
-  }
+
+#events-container {
+  padding-top:65px !important;
 }
- #events-container, #messages {
-   padding-top:55px;
-}
-#weather-container, #articles-container {
-  padding-top : 70px;
+#weather-container, #articles-container, #messages-container {
+  padding-top : 70px !important;
 }
 .navbar-brand {
   font-family: 'Gochi Hand', cursive;

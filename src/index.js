@@ -17,10 +17,11 @@ import users from './components/Users/users';
 
 const initializeUserView = () => {
   weather.initWeather();
-  messages();
+  messages.initMessagesPage();
   getArticles();
   addEditWeather.bindEvents();
   initializeEventsSection();
+  messages.reloadMessages();
 };
 
 const initApp = () => {

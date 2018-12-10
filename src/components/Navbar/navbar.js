@@ -46,7 +46,7 @@ const createNavbar = () => {
         <a id="navbar-button-articles" href="#articles-container" class="nav-link">Articles</a>
       </li> 
       <li class="nav-item">
-        <a id="navbar-button-messages" href="#messages" class="nav-link">Messages</a>
+        <a id="navbar-button-messages" href="#messages-container" class="nav-link">Messages</a>
       </li>  
       <li class="nav-item">
         <a id="navbar-button-logout" class="nav-link">Logout</a>
