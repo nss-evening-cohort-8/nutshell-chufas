@@ -23,4 +23,3 @@ Nutshell is a dashboard for people to organize their daily weather, events, arti
 [Feven Mulugeta,](https://github.com/Feven90)
 [Ripal Patel,](https://github.com/ripalpate)
 [and Maggie Leavell](https://github.com/mjleavell)
-
