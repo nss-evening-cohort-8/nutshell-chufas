@@ -48,7 +48,7 @@ const printWeather = (currentWeather, currentCity) => {
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
-      <div class="card-header">Current Conditions</div>
+      <div class="card-header" id="weather-card-header">Current Conditions</div>
       <div class="card-img-div">
         <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
       </div>  
@@ -74,7 +74,7 @@ const printGeoWeather = (currentWeather) => {
   const domstring = `
     <div class="row weather-card ">
       <div class="card col-6 mx-auto">
-      <div class="card-header">Current Conditions</div>
+      <div class="card-header" id="geo-weather-header">Current Conditions</div>
       <div class="card-img-div">
         <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
       </div>  

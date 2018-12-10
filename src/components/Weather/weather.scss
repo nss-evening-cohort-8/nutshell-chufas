@@ -1,5 +1,12 @@
+@import '../../styles/variables';
+
 #weather-container {
   margin-top: 5%;
   padding: 15px;
   margin-bottom: 15px;
+}
+
+#weather-card-header, #geo-weather-header {
+  font-weight: bold;
+  font-size: 110%;
 }
