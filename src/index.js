@@ -13,6 +13,7 @@ import initializeEventsSection from './components/EventsPage/eventsPage';
 import addEditWeather from './components/AddEditWeather/addEditWeather';
 import showAddForm from './components/AddEditEvents/addEditEvents';
 import './index.scss';
+import users from './components/Users/users';
 
 const initializeUserView = () => {
   weather.initWeather();
@@ -25,8 +26,8 @@ const initializeUserView = () => {
 const initApp = () => {
   firebase.initializeApp(apiKeys.firebaseKeys);
   navbar.createNavbar();
+  authHelpers.checkLoginStatus(initializeUserView, users.createNewUser);
   auth.loginBtn();
-  authHelpers.checkLoginStatus(initializeUserView);
   $('body').on('click', '#add-articles-btn', buildArticleForm.buildAddForm);
   $('body').on('click', '#add-events', showAddForm);
 };

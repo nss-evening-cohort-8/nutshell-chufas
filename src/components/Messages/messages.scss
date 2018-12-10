@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: 1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 6rem 0rem;
   #message-board {
     padding: 8px;
     width: 85%;
@@ -16,6 +16,7 @@
       max-height: 80vh;
       overflow-y: auto;
       .msg-row {
+        justify-content: left;
         p {
           padding: 0;
           margin: 0;

@@ -1,5 +1,3 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
 import $ from 'jquery';
 
 const getCurrentTimestamp = () => {
@@ -12,8 +10,6 @@ const convertTimestamp = (timestamp) => {
   const convertedTime = dt.toLocaleString();
   return convertedTime;
 };
-
-const getCurrentUserName = () => firebase.auth().currentUser.displayName;
 
 const messageInputError = () => {
   $('#msg-input-btn').removeClass('btn-secondary');
@@ -30,22 +26,9 @@ const resetMessageInput = () => {
   $('#msg-input').attr('placeholder', 'Enter new message');
 };
 
-// const getUserName = (uid) => {
-//   admin.auth().getUser(uid)
-//     .then((userRecord) => {
-//     // See the UserRecord reference doc for the contents of userRecord.
-//       console.log(userRecord);
-//     })
-//     .catch((error) => {
-//       console.log('Error fetching user data:', error);
-//     });
-// };
-
 export default {
   getCurrentTimestamp,
-  getCurrentUserName,
   convertTimestamp,
   messageInputError,
   resetMessageInput,
-  // getUserName,
 };
