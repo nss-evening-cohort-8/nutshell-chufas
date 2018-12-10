@@ -1,8 +1,14 @@
 @import "../../styles/variables";
+@import "~bootstrap/scss/bootstrap";
 
 #messages-container{
   margin-top: 5%;
   padding: 15px;
+}
+
+#message-board {
+  border: $gray-600 solid 1px;
+  border-radius: 5px;
 }
 
 .msg-title {

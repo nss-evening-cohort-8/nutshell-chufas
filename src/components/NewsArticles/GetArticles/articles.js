@@ -11,7 +11,7 @@ const creatCards = (articles) => {
   domString += '<button class=" btn btn-success m-3" id="add-articles-btn">+</button>';
   domString += '</div>';
   articles.forEach((article) => {
-    domString += `<div class="card" style="width: 50rem;">
+    domString += `<div class="card border-secondary mb-3" style="width: 50rem;">
     <div class="card-body">
     <h5 class="card-title">${article.title}</h5>
     <p class="card-text">${article.synopsis}</p>
