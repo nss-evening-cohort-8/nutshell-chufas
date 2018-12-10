@@ -13,7 +13,9 @@ const displayMsgInput = () => {
   const domString = `
     <input type="text" class="form-control mr-1 msg-input" id="msg-input" placeholder="Enter new message">
     <button type="button" class="btn btn-secondary msg-input mr-1" id="msg-input-btn">Submit</button>
-    <button type="button" class="btn btn-danger msg-input" id="msg-refresh-btn">Refresh</button>`;
+    <button type="button" class="btn btn-danger msg-input msg-refresh-btn">
+      <i class="fas fa-redo msg-refresh-btn"></i>
+    </button>`;
   $('#message-board-input').html(domString);
 };
 
@@ -157,6 +159,6 @@ $('body').on('click', '#msg-input-btn', addNewMessage);
 $('body').on('click', '.msg-delete-btn', deleteMessage);
 $('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
-$('body').on('click', '#msg-refresh-btn', getAllMessages);
+$('body').on('click', '.msg-refresh-btn', getAllMessages);
 
 export default { initMessagesPage, reloadMessages };
