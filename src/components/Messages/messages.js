@@ -40,7 +40,7 @@ const printAllMessages = (messagesArray, usersArray) => {
         <div class="col-md-3">
           <p class="text-left msg-row-user"><strong>${username}</strong></p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 p-0">
           <p class="text-left"><small>${message.isEdited === true ? `${messageHelpers.convertTimestamp(message.timestamp)} (edited)` : `${messageHelpers.convertTimestamp(message.timestamp)}`}</small></p>
         </div>
         <div class="col-md-6">
