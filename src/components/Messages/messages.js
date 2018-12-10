@@ -12,7 +12,8 @@ import './messages.scss';
 const displayMsgInput = () => {
   const domString = `
     <input type="text" class="form-control mr-1 msg-input" id="msg-input" placeholder="Enter new message">
-    <button type="button" class="btn btn-secondary msg-input" id="msg-input-btn">Submit</button>`;
+    <button type="button" class="btn btn-secondary msg-input mr-1" id="msg-input-btn">Submit</button>
+    <button type="button" class="btn btn-danger msg-input" id="msg-refresh-btn">Refresh</button>`;
   $('#message-board-input').html(domString);
 };
 
@@ -66,6 +67,7 @@ const getAllMessages = () => {
     messageData.getAllMessages().then((messagesArray) => {
       messagesArray.sort((first, second) => first.timestamp - second.timestamp);
       printAllMessages(messagesArray, usersArray);
+      $('#message-board-output').animate({ scrollTop: $('#message-board-output').get(0).scrollHeight }, 1000);
     })
       .catch((err) => {
         console.error(err);
@@ -93,7 +95,6 @@ const addNewMessage = (e) => {
   } else if ((e.keyCode === 13 || e.target.id === 'msg-input-btn') && (messageInput !== '')) {
     messageData.addNewMessage(newMessageObject).then(() => {
       getAllMessages();
-      $('#message-board-output').animate({ scrollTop: $('#message-board-output').get(0).scrollHeight }, 1000);
       messageHelpers.resetMessageInput();
     })
       .catch((error) => {
@@ -156,5 +157,6 @@ $('body').on('click', '#msg-input-btn', addNewMessage);
 $('body').on('click', '.msg-delete-btn', deleteMessage);
 $('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
+$('body').on('click', '#msg-refresh-btn', getAllMessages);
 
 export default { initMessagesPage, reloadMessages };
