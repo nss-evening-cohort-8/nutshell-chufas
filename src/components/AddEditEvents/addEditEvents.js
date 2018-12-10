@@ -3,6 +3,7 @@ import authHelpers from '../../helpers/authHelpers';
 import eventsData from '../../helpers/Data/eventData';
 import initializeEventsSection from '../EventsPage/eventsPage';
 import eventsHelper from '../../helpers/eventsHelpers';
+import './addEditEvents.scss';
 
 const formBuilder = (event) => {
   const form = `
@@ -45,7 +46,7 @@ const buildAddForm = () => {
   domString += '<button class="btn btn-danger" id="back-add-button">back</button>';
   domString += '<h2> Add New Event</h2>';
   domString += formBuilder(emptyEvent);
-  domString += '<button class="btn btn-primary" id="add-new-event">Save New Event</button>';
+  domString += '<button class="btn btn-secondary" id="add-new-event">Save New Event</button>';
   domString += '</div>';
   $('#add-edit-event').html(domString).show();
   $('#events').hide();
@@ -80,7 +81,7 @@ const showEditForm = (e) => {
       domString += '<button class="btn btn-danger" id="back-edit-button">back</button>';
       domString += '<h2> Edit Event</h2>';
       domString += formBuilder(singleEvent);
-      domString += `<button id="edit-event" class="btn btn-primary" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
+      domString += `<button id="edit-event" class="btn btn-secondary" data-single-edit-id=${singleEvent.id}>Save Event</button>`;
       domString += '</div>';
       $('#add-edit-event').html(domString).show();
       $('#events').hide();
