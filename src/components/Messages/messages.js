@@ -1,6 +1,7 @@
+// AUTHOR: Maggie Leavell
+// PURPOSE: A message board using CRUD to communicate with other users.
+
 /* eslint-disable max-len */
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import messageData from '../../helpers/Data/messageData';
@@ -140,6 +141,11 @@ const saveEditedMessage = (e) => {
   }
 };
 
+const reloadMessages = () => {
+  getAllMessages();
+  setTimeout(reloadMessages, 10000);
+};
+
 const initMessagesPage = () => {
   displayMsgInput();
   getAllMessages();
@@ -151,9 +157,4 @@ $('body').on('click', '.msg-delete-btn', deleteMessage);
 $('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
 
-const reloadMessages = () => {
-  getAllMessages();
-  alert('hi');
-};
-
-export default { initMessagesPage, getAllMessages, reloadMessages };
+export default { initMessagesPage, reloadMessages };

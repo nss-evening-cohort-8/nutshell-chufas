@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
 import firebase from 'firebase/app';
 import 'bootstrap';
 import $ from 'jquery';
@@ -23,6 +21,7 @@ const initializeUserView = () => {
   getArticles();
   addEditWeather.bindEvents();
   initializeEventsSection();
+  messages.reloadMessages();
 };
 
 const initApp = () => {
@@ -33,10 +32,5 @@ const initApp = () => {
   $('body').on('click', '#add-articles-btn', buildArticleForm.buildAddForm);
   $('body').on('click', '#add-events', showAddForm);
 };
-
-// const timeout = () => setInterval(messages.reloadMessages, 5000);
-
-// timeout();
-setTimeout(messages.reloadMessages, 1000);
 
 initApp();
