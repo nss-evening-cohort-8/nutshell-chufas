@@ -4,8 +4,6 @@ import apiKeys from '../../../db/apiKeys.json';
 const firebaseUrl = apiKeys.firebaseKeys.databaseURL;
 const weatherbitKey = apiKeys.weatherbitKeys.apiKey;
 const zipcodeKey = apiKeys.zipcodeKeys.apiKey;
-// const zipcodeKey2 = apiKeys.zipcodeKeys.apiKey2;
-
 
 const getWeatherData = uid => new Promise((resolve, reject) => {
   axios.get(`${firebaseUrl}/weather.json?orderBy="userUid"&equalTo="${uid}"`)
