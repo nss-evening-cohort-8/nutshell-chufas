@@ -77,7 +77,7 @@ const showEditForm = (e) => {
   const idtoEdit = e.target.dataset.editId;
   eventsData.getSingleEvent(idtoEdit)
     .then((singleEvent) => {
-      let domString = '<div class="edit-form">';
+      let domString = `<div class="edit-form" data-single-edit-id=${singleEvent.id}>`;
       domString += '<button class="btn btn-danger" id="back-edit-button">back</button>';
       domString += '<h2> Edit Event</h2>';
       domString += formBuilder(singleEvent);
@@ -106,6 +106,10 @@ const updateEvent = (e) => {
 $('body').on('click', '#add-new-event', addNewEvent);
 $('body').on('click', '.edit-button', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
-
+$('body').on('keyup', '.add-form', (e) => {
+  if (e.keyCode === 13) {
+    addNewEvent();
+  }
+});
 
 export default buildAddForm;
