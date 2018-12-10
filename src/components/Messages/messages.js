@@ -143,7 +143,7 @@ const saveEditedMessage = (e) => {
 
 const reloadMessages = () => {
   getAllMessages();
-  setTimeout(reloadMessages, 10000);
+  setTimeout(reloadMessages, 5000);
 };
 
 const initMessagesPage = () => {
