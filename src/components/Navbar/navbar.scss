@@ -1,5 +1,3 @@
-@import "../../styles/variables";
-
 #main-nav {
   position: fixed !important;
   top: 0;
@@ -13,24 +11,12 @@
     text-decoration: none;
   }
 }
-#navbar-button-logout {
-  color: #000;
-}
  #events-container, #messages {
-   padding-top:65px !important;
+   padding-top:55px;
 }
 #weather-container, #articles-container {
-  padding-top : 70px !important;
+  padding-top : 70px;
 }
 .navbar-brand {
-  font-family: $gochiFont;
-  font-size: 1.5em !important;
+  font-family: 'Gochi Hand', cursive;
 }
-// #navbar-button-weather, #navbar-button-events, #navbar-button-articles, #navbar-button-messages, #navbar-button-logout {
-//   background-color: rgb(233, 199, 158);
-//   margin: 0 10px;
-//   color: black;
-//   padding: 5px 10px;
-//   border-radius: 5px;
-// }
-
