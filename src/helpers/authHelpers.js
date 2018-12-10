@@ -21,6 +21,7 @@ const checkLoginStatus = (initializeUserView, getUserName) => {
       $('#add-articles').hide();
       $('#weather-container').show();
       $('#events').show();
+      $('.msg-title').show();
       getUserName(getCurrentUid);
       initializeUserView();
     } else {
@@ -36,6 +37,7 @@ const checkLoginStatus = (initializeUserView, getUserName) => {
       $('#add-articles').hide();
       $('#weather-container').hide();
       $('#events').hide();
+      $('.msg-title').hide();
     }
   });
 };
