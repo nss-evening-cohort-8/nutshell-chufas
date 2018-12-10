@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import firebase from 'firebase/app';
 import 'bootstrap';
 import $ from 'jquery';
@@ -32,7 +34,9 @@ const initApp = () => {
   $('body').on('click', '#add-events', showAddForm);
 };
 
-const timeout = () => setInterval(messages.reloadMessages, 5000);
+// const timeout = () => setInterval(messages.reloadMessages, 5000);
 
-timeout();
+// timeout();
+setTimeout(messages.reloadMessages, 1000);
+
 initApp();

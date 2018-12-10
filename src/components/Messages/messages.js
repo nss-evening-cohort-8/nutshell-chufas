@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import $ from 'jquery';
 import authHelpers from '../../helpers/authHelpers';
 import messageData from '../../helpers/Data/messageData';
@@ -150,8 +152,8 @@ $('body').on('click', '.msg-edit-btn', changeMessageToInput);
 $('body').on('keyup', '.edit-input', saveEditedMessage);
 
 const reloadMessages = () => {
-  $('#message-board').load();
-  console.log('reload');
+  getAllMessages();
+  alert('hi');
 };
 
 export default { initMessagesPage, getAllMessages, reloadMessages };
