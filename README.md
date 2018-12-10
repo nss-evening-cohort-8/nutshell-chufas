@@ -3,7 +3,7 @@
 ### Description
 Nutshell is a dashboard for people to organize their daily weather, events, articles, and chat messages.
 
-![homepage](./screenshots/homepage.png)
+![homepage](./screenshots/nutshell.png)
 
 ### Technologies Used
 * HTML
