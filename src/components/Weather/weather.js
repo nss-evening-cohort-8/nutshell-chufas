@@ -47,7 +47,7 @@ const printWeather = (currentWeather, currentCity) => {
   $('#geo-weather').hide();
   const domstring = `
     <div class="row weather-card ">
-      <div class="card col-6 mx-auto">
+      <div class="card col-6 mx-auto border-secondary">
       <div class="card-header" id="weather-card-header">Current Conditions</div>
       <div class="card-img-div">
         <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
@@ -72,8 +72,8 @@ const printGeoWeather = (currentWeather) => {
   $('#weather').hide();
   $('#geo-weather').show();
   const domstring = `
-    <div class="row weather-card ">
-      <div class="card col-6 mx-auto">
+    <div class="row weather-card">
+      <div class="card col-6 mx-auto border-secondary">
       <div class="card-header" id="geo-weather-header">Current Conditions</div>
       <div class="card-img-div">
         <img class="card-img-top img-fluid" src="https://www.weatherbit.io/static/img/icons/${currentWeather[0].weather.icon}.png" alt="weather icon">
