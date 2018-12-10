@@ -106,6 +106,10 @@ const updateEvent = (e) => {
 $('body').on('click', '#add-new-event', addNewEvent);
 $('body').on('click', '.edit-button', showEditForm);
 $('body').on('click', '#edit-event', updateEvent);
-
+$('body').on('keyup', '.add-form', (e) => {
+  if (e.keyCode === 13) {
+    addNewEvent();
+  }
+});
 
 export default buildAddForm;
