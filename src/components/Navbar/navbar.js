@@ -37,10 +37,10 @@ const createNavbar = () => {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a id="navbar-button-weather" href="#weather-container" class="nav-link">Weather</a>
+        <a id="navbar-button-weather" href="#weather-event" class="nav-link">Weather</a>
       </li> 
       <li class="nav-item">
-        <a id="navbar-button-events" href="#events-container" class="nav-link">Events</a>
+        <a id="navbar-button-events" href="#weather-event" class="nav-link">Events</a>
       </li> 
       <li class="nav-item">
         <a id="navbar-button-articles" href="#articles-container" class="nav-link">Articles</a>
