@@ -5,6 +5,7 @@
 body {
   background-image: $backgroundImage;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 .weather-event-wrapper {

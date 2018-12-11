@@ -7,7 +7,7 @@ import getAllArticles from '../../../helpers/Data/dataGetter';
 const creatCards = (articles) => {
   let domString = '';
   domString += '<div class="d-flex flex-row justify-content-center">';
-  domString += '<h5 class="heading-article"> Articles</h5>';
+  domString += '<h5 class="heading-article text-light"> Articles</h5>';
   domString += '<button class=" btn btn-success m-3" id="add-articles-btn">+</button>';
   domString += '</div>';
   articles.forEach((article) => {
