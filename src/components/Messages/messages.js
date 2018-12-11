@@ -149,16 +149,19 @@ const reloadMessages = () => {
   setTimeout(reloadMessages, 35000);
 };
 
+const bindEvents = () => {
+  $('body').on('keyup', '#msg-input', addNewMessage);
+  $('body').on('click', '#msg-input-btn', addNewMessage);
+  $('body').on('click', '.msg-delete-btn', deleteMessage);
+  $('body').on('click', '.msg-edit-btn', changeMessageToInput);
+  $('body').on('keyup', '.edit-input', saveEditedMessage);
+  $('body').on('click', '.msg-refresh-btn', getAllMessages);
+};
+
 const initMessagesPage = () => {
   displayMsgInput();
   getAllMessages();
+  bindEvents();
 };
-
-$('body').on('keyup', '#msg-input', addNewMessage);
-$('body').on('click', '#msg-input-btn', addNewMessage);
-$('body').on('click', '.msg-delete-btn', deleteMessage);
-$('body').on('click', '.msg-edit-btn', changeMessageToInput);
-$('body').on('keyup', '.edit-input', saveEditedMessage);
-$('body').on('click', '.msg-refresh-btn', getAllMessages);
 
 export default { initMessagesPage, reloadMessages };
