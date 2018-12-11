@@ -167,9 +167,9 @@ const showGeoWeather = () => {
   $('#weather-warning').html('');
 };
 
-navigator.geolocation.getCurrentPosition(geoWeatherPage);
 
 const initWeather = () => {
+  navigator.geolocation.getCurrentPosition(geoWeatherPage);
   getLocationsForDropdown();
   weatherPage();
   printWeatherWarning();
