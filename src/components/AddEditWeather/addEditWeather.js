@@ -70,15 +70,12 @@ const updateCurrentLocation = (locationId) => {
 const updateAllIsCurrent = (e) => {
   const locationId = e.target.id;
   const uid = authHelpers.getCurrentUid();
-  return weatherData.getWeatherData(uid)
+  return weatherData.getCurrentWeatherData(uid)
     .then((weatherArray) => {
-      weatherArray.forEach((location) => {
-        let current = location.isCurrent;
-        if (current === true) {
-          current = false;
-        }
-        weatherData.updateIsCurrent(location.id, current);
-      });
+      console.log(weatherArray);
+      let current = weatherArray.isCurrent;
+      current = false;
+      weatherData.updateIsCurrent(weatherArray.id, current);
     })
     .then(() => {
       updateCurrentLocation(locationId);
